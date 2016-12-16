@@ -1,0 +1,43 @@
+<md-toolbar color="primary">
+
+  <span>
+    <button *ngIf="toolbarService.menuButton.active" md-icon-button (click)="onClickSave()"
+      md-tooltip="{{toolbarService.menuButton.tooltip}}" 
+      tooltip-position="{{toolbarService.menuButton.tooltipPosition}}">
+      <md-icon class="md-24" svgIcon="toolbar:menu"></md-icon>
+    </button>
+  </span>
+
+  <span>
+    <button *ngIf="toolbarService.saveButton.active" md-icon-button (click)="onClickSave()"
+      md-tooltip="{{toolbarService.saveButton.tooltip}}" 
+      tooltip-position="{{toolbarService.saveButton.tooltipPosition}}">
+      <md-icon class="md-24" svgIcon="toolbar:save"></md-icon>
+    </button>
+  </span>
+
+  <span>
+    <button *ngIf="toolbarService.cancelButton.active" md-icon-button (click)="onClickCancel()"
+      md-tooltip="{{toolbarService.cancelButton.tooltip}}" 
+      tooltip-position="{{toolbarService.cancelButton.tooltipPosition}}">
+      <md-icon class="md-24" svgIcon="toolbar:cancel"></md-icon>
+    </button>
+  </span>
+
+  <span class="toolbar-space-filler"></span>
+
+  <span>
+    {{toolbarService.mainTitle}}{{toolbarService.subTitle}}
+  </span>
+
+  <span class="toolbar-space-filler"></span>
+
+  <span>
+    <button *ngIf="toolbarService.exitButton.active" md-icon-button (click)="onClickExit()"
+      md-tooltip="{{toolbarService.exitButton.tooltip}}" 
+      tooltip-position="{{toolbarService.exitButton.tooltipPosition}}">
+      <md-icon class="md-24" svgIcon="toolbar:close"></md-icon>
+    </button>
+  </span>
+
+</md-toolbar>
