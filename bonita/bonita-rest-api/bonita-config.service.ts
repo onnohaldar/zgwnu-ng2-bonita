@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Location } from '@angular/common'
 
-import { BonitaSession } from './bonita-session'
-
 @Injectable()
 export class BonitaConfigService {
-    bonitaSession: BonitaSession
-
     // default zgwnu Business Data Model Package configuration
     businessDataModelPackage: string = 'com.zaakgerichtwerkennu.model'
 

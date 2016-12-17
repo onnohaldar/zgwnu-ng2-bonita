@@ -1,4 +1,4 @@
-import { BonitaUtils } from './bonita-utils'
+import { BonitaUtils } from '../bonita-rest-api/bonita-utils'
 
 export class BonitaActivity {
 

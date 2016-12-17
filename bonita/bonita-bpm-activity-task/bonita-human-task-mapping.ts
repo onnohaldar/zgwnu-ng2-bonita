@@ -1,6 +1,6 @@
 import { Response } from '@angular/http'
 
-import { BonitaDataMappingInterface } from './bonita-data-mapping.interface'
+import { BonitaDataMappingInterface } from '../bonita-rest-api/bonita-data-mapping.interface'
 import { BonitaHumanTask } from './bonita-human-task'
 
 export class BonitaHumanTaskMapping implements BonitaDataMappingInterface {

@@ -16,8 +16,8 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 
-import { BonitaRestApiService } from '../bonita-rest-api.service'
-import { BonitaConfigService } from '../bonita-config.service'
+import { BonitaRestApiService } from '../bonita-rest-api/bonita-rest-api.service'
+import { BonitaConfigService } from '../bonita-rest-api/bonita-config.service'
 import { BonitaFileUploadResponse } from './bonita-file-upload-response'
 
 @Injectable()

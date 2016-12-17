@@ -11,14 +11,14 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 
-import { BonitaRestApiService } from './bonita-rest-api.service'
-import { BonitaDataMappingInterface } from './bonita-data-mapping.interface'
-import { BonitaConfigService } from './bonita-config.service'
+import { BonitaRestApiService } from '../bonita-rest-api/bonita-rest-api.service'
+import { BonitaDataMappingInterface } from '../bonita-rest-api/bonita-data-mapping.interface'
+import { BonitaConfigService } from '../bonita-rest-api/bonita-config.service'
 import { BonitaBpmTaskUpdateInput } from './bonita-bpm-task-update-input'
 import { BonitaUserTask } from './bonita-user-task'
 import { BonitaUserTaskMapping } from './bonita-user-task-mapping'
-import { BonitaResponse } from './bonita-response'
-import { BonitaAuthenticationService } from './bonita-authentication.service'
+import { BonitaResponse } from '../bonita-rest-api/bonita-response'
+import { BonitaAuthenticationService } from '../bonita-authentication/bonita-authentication.service'
 
 @Injectable()
 export class BonitaBpmUserTaskService extends BonitaRestApiService {

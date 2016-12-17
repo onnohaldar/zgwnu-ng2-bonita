@@ -4,8 +4,8 @@ import { MdIconRegistry } from '@angular/material'
 
 // imports bonita from library
 import { BonitaFileUploadService } from './bonita-file-upload.service'
-import { BonitaContractInputFile } from '../bonita-contract-input-file' 
-import { BonitaErrorResponse } from '../bonita-error-response'
+import { BonitaContractInputFile } from './bonita-contract-input-file' 
+import { BonitaErrorResponse } from '../bonita-rest-api/bonita-error-response'
 import { BonitaFileUploadResponse } from './bonita-file-upload-response'
 
 @Component({
