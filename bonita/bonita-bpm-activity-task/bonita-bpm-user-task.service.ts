@@ -33,7 +33,6 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
     { 
         super()
         this.userTaskResourceUrl = configService.apiUrl + this.userTaskResourcePath
-        console.log(this.configService.bonitaSession)
     }
 
     getUserTask(userTaskId: string): Observable<BonitaUserTask> {
