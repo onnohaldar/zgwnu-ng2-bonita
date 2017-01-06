@@ -44,5 +44,9 @@ export class ToolbarComponent implements OnInit {
   onClickCancel() {
     this.toolbarService.componentReference.onToolbarClickCancel()
   }
+
+  onClickMenu() {
+    this.toolbarService.componentReference.onToolbarClickMenu()
+  }
   
 }
