@@ -1,4 +1,5 @@
 // imports generic angular 2 modules
+import { DomSanitizer } from '@angular/platform-browser'
 import { Component, OnInit, Input } from '@angular/core'
 import { MdIconRegistry } from '@angular/material'
 
@@ -26,9 +27,11 @@ export class BonitaFileUploadComponent implements OnInit {
     constructor (
         private fileUploadService: BonitaFileUploadService,
         private mdIconRegistry: MdIconRegistry,
+        private sanitizer: DomSanitizer, 
     )
     {
-        mdIconRegistry.addSvgIconInNamespace('bonita', 'file_upload', this.fileIconsPath + 'ic_file_upload_24px.svg')
+        mdIconRegistry.addSvgIconInNamespace('bonita', 'file_upload', 
+            sanitizer.bypassSecurityTrustResourceUrl(this.fileIconsPath + 'ic_file_upload_24px.svg'))
     }
 
     ngOnInit() {
