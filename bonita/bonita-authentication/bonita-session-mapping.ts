@@ -6,7 +6,8 @@ import { BonitaSession } from './bonita-session'
 export class BonitaSessionMapping implements BonitaDataMappingInterface {
 
     mapResponse(res: Response) {
-        let sessionData = new BonitaSession(res.json())
+        console.log(res.headers)
+        let sessionData = new BonitaSession(res)
         return sessionData
     }
 

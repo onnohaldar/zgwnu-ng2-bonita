@@ -1,7 +1,10 @@
+import { Response } from '@angular/http'
+
 export class BonitaSession {
 
-  constructor(sessionData: any)
+  constructor(res: Response)
   {
+    let sessionData = res.json()
     this.user_id = sessionData.user_id
     this.user_name = sessionData.user_name
     this.session_id = sessionData.session_id
@@ -9,6 +12,9 @@ export class BonitaSession {
     this.is_technical_user = (sessionData.is_technical_user == 'true')
     this.version = sessionData.version
     if (sessionData.tenant) { this.tenant = sessionData.tenant }
+    console.log('BonitaSession.constructor')
+    let headers = res.headers.toJSON()
+    this.token = headers['X-Bonita-API-Token']
   }
 
   user_id: string
@@ -18,4 +24,5 @@ export class BonitaSession {
   is_technical_user: boolean
   version: string
   tenant?: string
+  token?: string
 }
