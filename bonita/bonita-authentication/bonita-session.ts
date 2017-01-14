@@ -1,10 +1,9 @@
-import { Response } from '@angular/http'
+import { Headers } from '@angular/http'
 
 export class BonitaSession {
 
-  constructor(res: Response)
+  constructor(sessionData: any, headerData: Headers)
   {
-    let sessionData = res.json()
     this.user_id = sessionData.user_id
     this.user_name = sessionData.user_name
     this.session_id = sessionData.session_id
@@ -13,7 +12,7 @@ export class BonitaSession {
     this.version = sessionData.version
     if (sessionData.tenant) { this.tenant = sessionData.tenant }
     console.log('BonitaSession.constructor')
-    let headers = res.headers.toJSON()
+    let headers = headerData.toJSON()
     this.token = headers['X-Bonita-API-Token']
   }
 

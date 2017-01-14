@@ -16,7 +16,18 @@ export class BonitaConfigService {
     baseUrl: string = this.hostUrl + this.basePath
     apiUrl: string = this.baseUrl + this.apiPath
     fileUploadUrl: string = this.baseUrl + this.fileUploadPath
+
+    // CSRF token current session
+    private _sessionToken: string
     
+    set sessionToken(token: string) {
+        this._sessionToken = token
+    }
+
+    get sessionToken(): string {
+        return this._sessionToken
+    }
+
     constructor (
         location: Location)
     {}

@@ -68,6 +68,7 @@ export class BonitaAuthenticationService extends BonitaRestApiService {
                                 console.log(session)
                                  if (creds.username == session.user_name) {
                                      this.session = session
+                                     this.setSessionToken(session)
                                      if (creds.navigateTo) { this.router.navigate([creds.navigateTo]) }
                                  }
                             },
@@ -76,6 +77,12 @@ export class BonitaAuthenticationService extends BonitaRestApiService {
                 },
                 errorResponse => this.errorResponse = errorResponse
             )
+    }
+
+    setSessionToken(session: BonitaSession) {
+        if (session.token) {
+            this.bonitaConfigService.sessionToken = session.token
+        }
     }
 
 }
