@@ -24,13 +24,13 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     private resourceUrl: string
 
     constructor(
-        private bonitaConfigService: BonitaConfigService,
+        private configService: BonitaConfigService,
         private http: Http
     ) 
     { 
         super()
         console.log('BonitaBpmProcessService')
-        this.resourceUrl = bonitaConfigService.apiUrl + this.resourcePath
+        this.resourceUrl = configService.apiUrl + this.resourcePath
         console.log('resourceUrl = ' + this.resourceUrl)
         this.mapping = new BonitaProcessDefinitionMapping()
     }
@@ -60,7 +60,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     createCase(processId: string, contractValues: any): Observable<BonitaCreateCaseSuccessResponse> {
         let postUrl = this.resourceUrl + '/' + processId + '/instantiation'
         console.log('postUrl = ' + postUrl)
-        return this.http.post(postUrl, contractValues, this.options)
+        return this.http.post(postUrl, contractValues, this.getSendOptions(this.configService))
                         .map(this.mapCreateCaseSuccessResponse)
                         .catch(this.handleResponseError)
     }
