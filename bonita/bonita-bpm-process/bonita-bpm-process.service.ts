@@ -59,8 +59,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     //
     createCase(processId: string, contractValues: any): Observable<BonitaCreateCaseSuccessResponse> {
         let postUrl = this.resourceUrl + '/' + processId + '/instantiation'
-        console.log('postUrl = ' + postUrl)
-        return this.http.post(postUrl, contractValues, this.getSendOptions(this.configService))
+        return this.http.post(postUrl, contractValues, this.getSendRequestOptions(this.configService))
                         .map(this.mapCreateCaseSuccessResponse)
                         .catch(this.handleResponseError)
     }

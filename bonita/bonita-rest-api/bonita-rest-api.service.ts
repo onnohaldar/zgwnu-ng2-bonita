@@ -24,11 +24,10 @@ export abstract class BonitaRestApiService {
 
     protected mapping: BonitaDataMappingInterface = new BonitaDataMapping()
 
-    protected getSendOptions(configService: BonitaConfigService): RequestOptions {
+    protected getSendRequestOptions(configService: BonitaConfigService): RequestOptions {
         let sendOptions: RequestOptions = this.options
         if (configService.sessionToken) {
             sendOptions.headers.append('X-Bonita-API-Token', configService.sessionToken)
-            console.log(sendOptions)
         } 
         return sendOptions
     }
