@@ -85,4 +85,15 @@ export class BonitaAuthenticationService extends BonitaRestApiService {
         }
     }
 
+    loadCurrentSession() {
+        this.getSession()
+            .subscribe(
+                session => {
+                    this.session = session
+                    this.setSessionToken(session)
+                },
+                errorResponse => this.errorResponse = errorResponse
+            )
+    }
+
 }
