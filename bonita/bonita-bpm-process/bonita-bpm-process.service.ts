@@ -36,7 +36,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     }
 
     searchProcessDefinitions(searchParms: BonitaSearchParms): Observable<BonitaProcessDefinition[]> {
-        return this.http.get(this.buildSearchRequest(searchParms))
+        return this.http.get(this.buildSearchRequest(searchParms), this.options)
                         .map(this.mapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
@@ -46,7 +46,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     }
 
     getProcessDefinition(processDefinitionId: string): Observable<BonitaProcessDefinition> {
-        return this.http.get(this.resourceUrl + '/' + processDefinitionId)
+        return this.http.get(this.resourceUrl + '/' + processDefinitionId, this.options)
                         .map(this.mapping.mapResponse)
                         .catch(this.handleResponseError)
     }

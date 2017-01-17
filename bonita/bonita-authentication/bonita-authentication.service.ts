@@ -50,7 +50,7 @@ export class BonitaAuthenticationService extends BonitaRestApiService {
 
     getSession(): Observable<BonitaSession> {
         let sessionMapping: BonitaDataMappingInterface = new BonitaSessionMapping()
-        return this.http.get(this.bonitaConfigService.apiUrl + '/system/session/unusedid')
+        return this.http.get(this.bonitaConfigService.apiUrl + '/system/session/unusedid', this.options)
                 .map(sessionMapping.mapResponse)
                 .catch(this.handleResponseError)
 

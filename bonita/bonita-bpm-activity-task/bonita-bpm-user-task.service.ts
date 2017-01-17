@@ -37,13 +37,13 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
 
     getUserTask(userTaskId: string): Observable<BonitaUserTask> {
         let userTaskMapping: BonitaDataMappingInterface = new BonitaUserTaskMapping()
-        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId)
+        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId, this.options)
                         .map(userTaskMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
     getUserTaskContext(userTaskId: string): Observable<any> {
-        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId + '/context')
+        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId + '/context', this.options)
                         .map(this.mapping.mapResponse)
                         .catch(this.handleResponseError)
     }
