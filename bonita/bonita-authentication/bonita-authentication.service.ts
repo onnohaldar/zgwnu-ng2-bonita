@@ -28,20 +28,18 @@ export class BonitaAuthenticationService extends BonitaRestApiService {
     errorResponse: BonitaErrorResponse
 
     constructor(
-        private bonitaConfigService: BonitaConfigService,
+        private configService: BonitaConfigService,
         private http: Http,
         private router: Router)
     { 
         super()
     }
 
-    session: BonitaSession
-
     private executeLogin(creds: BonitaCredentials): Observable<BonitaResponse> {
         let credsUrlEncoded: string = 'username=' + creds.username + '&password=' + creds.password + '&redirect=false'
         let headers: Headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
         let options: RequestOptions = new RequestOptions({ headers: headers })
-        let postUrl: string = this.bonitaConfigService.baseUrl + '/loginservice'
+        let postUrl: string = this.configService.baseUrl + '/loginservice'
 
         return this.http.post(postUrl, credsUrlEncoded, options)
                         .map(this.mapSuccessResponse)
@@ -50,7 +48,7 @@ export class BonitaAuthenticationService extends BonitaRestApiService {
 
     getSession(): Observable<BonitaSession> {
         let sessionMapping: BonitaDataMappingInterface = new BonitaSessionMapping()
-        return this.http.get(this.bonitaConfigService.apiUrl + '/system/session/unusedid')
+        return this.http.get(this.configService.apiUrl + '/system/session/unusedid', this.options)
                 .map(sessionMapping.mapResponse)
                 .catch(this.handleResponseError)
 
@@ -64,10 +62,8 @@ export class BonitaAuthenticationService extends BonitaRestApiService {
                     this.getSession()
                         .subscribe(
                             session => {
-                                console.log('login.getSession()')
-                                console.log(session)
                                  if (creds.username == session.user_name) {
-                                     this.session = session
+                                     this.configService.session = session
                                      if (creds.navigateTo) { this.router.navigate([creds.navigateTo]) }
                                  }
                             },

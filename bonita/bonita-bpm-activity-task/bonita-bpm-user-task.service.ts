@@ -37,13 +37,13 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
 
     getUserTask(userTaskId: string): Observable<BonitaUserTask> {
         let userTaskMapping: BonitaDataMappingInterface = new BonitaUserTaskMapping()
-        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId)
+        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId, this.options)
                         .map(userTaskMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
     getUserTaskContext(userTaskId: string): Observable<any> {
-        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId + '/context')
+        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId + '/context', this.options)
                         .map(this.mapping.mapResponse)
                         .catch(this.handleResponseError)
     }
@@ -52,7 +52,7 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
         let body: BonitaBpmTaskUpdateInput = new BonitaBpmTaskUpdateInput()
         body.assigned_id = userId
         let putUrl = this.userTaskResourceUrl + '/' + userTaskId
-        return this.http.put(putUrl, body, this.options)
+        return this.http.put(putUrl, body, this.getSendRequestOptions(this.configService))
                         .map(this.mapSuccessResponse)
                         .catch(this.handleResponseError)
 
@@ -60,7 +60,7 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
 
     executeUserTask(userTaskId: string, contractValues: any): Observable<BonitaResponse> {
         let postUrl = this.userTaskResourceUrl + '/' + userTaskId + '/execution'
-        return this.http.post(postUrl, contractValues, this.options)
+        return this.http.post(postUrl, contractValues, this.getSendRequestOptions(this.configService))
                         .map(this.mapSuccessResponse)
                         .catch(this.handleResponseError)
     }

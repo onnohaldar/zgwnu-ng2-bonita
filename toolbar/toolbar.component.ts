@@ -1,6 +1,5 @@
 import { DomSanitizer } from '@angular/platform-browser'
 import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
 import { MdIconRegistry } from '@angular/material'
 
 import { ToolbarService } from './toolbar.service'
@@ -18,7 +17,6 @@ export class ToolbarComponent implements OnInit {
   private navigationIconsPath = this.iconsPath + 'navigation/'
 
   constructor(
-    private router: Router,
     public toolbarService: ToolbarService,
     private mdIconRegistry: MdIconRegistry, 
     private sanitizer: DomSanitizer, 
@@ -41,7 +39,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   onClickExit() {
-    this.router.navigate(['/exit'])
+    this.toolbarService.componentReference.onToolbarClickExit()
   }
 
   onClickSave() {

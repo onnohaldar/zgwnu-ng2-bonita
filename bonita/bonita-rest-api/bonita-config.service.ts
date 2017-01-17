@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Location } from '@angular/common'
 
+import { BonitaSession } from '../bonita-authentication/bonita-session'
+
 @Injectable()
 export class BonitaConfigService {
     // default zgwnu Business Data Model Package configuration
@@ -16,7 +18,23 @@ export class BonitaConfigService {
     baseUrl: string = this.hostUrl + this.basePath
     apiUrl: string = this.baseUrl + this.apiPath
     fileUploadUrl: string = this.baseUrl + this.fileUploadPath
+
+    // current session
+    private _session: BonitaSession
     
+    set session(session: BonitaSession) {
+        this._session = session
+    }
+
+    get session(): BonitaSession {
+        return this._session
+    }
+
+    get sessionToken(): string {
+        // CSRF token current session
+        return this._session.token
+    }
+
     constructor (
         location: Location)
     {}

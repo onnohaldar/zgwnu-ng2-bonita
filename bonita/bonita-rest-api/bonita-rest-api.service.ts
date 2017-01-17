@@ -10,6 +10,7 @@ import { Response, Headers, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/observable/throw'
 
+import { BonitaConfigService } from './bonita-config.service'
 import { BonitaDataMappingInterface } from './bonita-data-mapping.interface'
 import { BonitaDataMapping } from './bonita-data-mapping'
 import { BonitaResponse } from './bonita-response'
@@ -22,6 +23,14 @@ export abstract class BonitaRestApiService {
     protected options = new RequestOptions({ headers: this.headers })
 
     protected mapping: BonitaDataMappingInterface = new BonitaDataMapping()
+
+    protected getSendRequestOptions(configService: BonitaConfigService): RequestOptions {
+        let sendOptions: RequestOptions = this.options
+        if (configService.sessionToken) {
+            sendOptions.headers.append('X-Bonita-API-Token', configService.sessionToken)
+        } 
+        return sendOptions
+    }
 
     protected mapSuccessResponse(res: Response) {
         let successResponse = new BonitaResponse()

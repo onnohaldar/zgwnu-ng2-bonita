@@ -24,19 +24,19 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     private resourceUrl: string
 
     constructor(
-        private bonitaConfigService: BonitaConfigService,
+        private configService: BonitaConfigService,
         private http: Http
     ) 
     { 
         super()
         console.log('BonitaBpmProcessService')
-        this.resourceUrl = bonitaConfigService.apiUrl + this.resourcePath
+        this.resourceUrl = configService.apiUrl + this.resourcePath
         console.log('resourceUrl = ' + this.resourceUrl)
         this.mapping = new BonitaProcessDefinitionMapping()
     }
 
     searchProcessDefinitions(searchParms: BonitaSearchParms): Observable<BonitaProcessDefinition[]> {
-        return this.http.get(this.buildSearchRequest(searchParms))
+        return this.http.get(this.buildSearchRequest(searchParms), this.options)
                         .map(this.mapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
@@ -46,7 +46,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     }
 
     getProcessDefinition(processDefinitionId: string): Observable<BonitaProcessDefinition> {
-        return this.http.get(this.resourceUrl + '/' + processDefinitionId)
+        return this.http.get(this.resourceUrl + '/' + processDefinitionId, this.options)
                         .map(this.mapping.mapResponse)
                         .catch(this.handleResponseError)
     }
@@ -59,8 +59,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     //
     createCase(processId: string, contractValues: any): Observable<BonitaCreateCaseSuccessResponse> {
         let postUrl = this.resourceUrl + '/' + processId + '/instantiation'
-        console.log('postUrl = ' + postUrl)
-        return this.http.post(postUrl, contractValues, this.options)
+        return this.http.post(postUrl, contractValues, this.getSendRequestOptions(this.configService))
                         .map(this.mapCreateCaseSuccessResponse)
                         .catch(this.handleResponseError)
     }

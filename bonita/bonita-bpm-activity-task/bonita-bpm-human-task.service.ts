@@ -35,7 +35,7 @@ export class BonitaBpmHumanTaskService extends BonitaRestApiService {
 
     searchHumanTasks(searchParms: BonitaSearchParms): Observable<BonitaHumanTask[]> {
         let humanTaskMapping: BonitaDataMappingInterface = new BonitaHumanTaskMapping()
-        return this.http.get(this.buildHumanTaskSearchRequest(searchParms))
+        return this.http.get(this.buildHumanTaskSearchRequest(searchParms), this.options)
                         .map(humanTaskMapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
@@ -46,7 +46,7 @@ export class BonitaBpmHumanTaskService extends BonitaRestApiService {
 
     getHumanTask(humanTaskId: string): Observable<BonitaHumanTask> {
         let humanTaskMapping: BonitaDataMappingInterface = new BonitaHumanTaskMapping()
-        return this.http.get(this.humanTaskResourceUrl + '/' + humanTaskId)
+        return this.http.get(this.humanTaskResourceUrl + '/' + humanTaskId, this.options)
                         .map(humanTaskMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
