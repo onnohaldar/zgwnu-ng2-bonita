@@ -11,8 +11,8 @@ export class BonitaSession {
     this.is_technical_user = (sessionData.is_technical_user == 'true')
     this.version = sessionData.version
     if (sessionData.tenant) { this.tenant = sessionData.tenant }
-    console.log('BonitaSession.constructor')
     let headers = headerData.toJSON()
+    console.log(headers)
     this.token = headers['X-Bonita-API-Token']
   }
 
@@ -23,5 +23,5 @@ export class BonitaSession {
   is_technical_user: boolean
   version: string
   tenant?: string
-  token?: string
+  token?: string[]
 }
