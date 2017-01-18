@@ -19,17 +19,16 @@ import { BonitaErrorResponse } from './bonita-error-response'
 @Injectable()
 export abstract class BonitaRestApiService {
     
-    protected headers = new Headers({ 'Content-Type': 'application/json' })
-    protected options = new RequestOptions({ headers: this.headers })
+    protected headers: Headers = new Headers({ 'Content-Type': 'application/json' })
+    protected options: RequestOptions = new RequestOptions({ headers: this.headers })
+    protected sendOptions: RequestOptions = new RequestOptions({ headers: this.headers })
 
     protected mapping: BonitaDataMappingInterface = new BonitaDataMapping()
 
-    protected getSendRequestOptions(configService: BonitaConfigService): RequestOptions {
-        let sendOptions: RequestOptions = this.options
+    protected configSendOptions(configService: BonitaConfigService) {
         if (configService.sessionToken) {
-            sendOptions.headers.append('X-Bonita-API-Token', configService.sessionToken)
+            this.sendOptions.headers.append('X-Bonita-API-Token', configService.sessionToken)
         } 
-        return sendOptions
     }
 
     protected mapSuccessResponse(res: Response) {

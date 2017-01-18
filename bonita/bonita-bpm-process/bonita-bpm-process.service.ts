@@ -29,15 +29,18 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     ) 
     { 
         super()
-        console.log('BonitaBpmProcessService')
+
+        // configure resource urls
         this.resourceUrl = configService.apiUrl + this.resourcePath
-        console.log('resourceUrl = ' + this.resourceUrl)
-        this.mapping = new BonitaProcessDefinitionMapping()
+
+        // configure request sendOptions var (required for post, put, delete, save, ..)
+        this.configSendOptions(configService)
     }
 
     searchProcessDefinitions(searchParms: BonitaSearchParms): Observable<BonitaProcessDefinition[]> {
+        let processDefinitionMapping: BonitaProcessDefinitionMapping = new BonitaProcessDefinitionMapping()
         return this.http.get(this.buildSearchRequest(searchParms), this.options)
-                        .map(this.mapping.mapResponseArray)
+                        .map(processDefinitionMapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
 
@@ -46,8 +49,9 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     }
 
     getProcessDefinition(processDefinitionId: string): Observable<BonitaProcessDefinition> {
+        let processDefinitionMapping: BonitaProcessDefinitionMapping = new BonitaProcessDefinitionMapping()
         return this.http.get(this.resourceUrl + '/' + processDefinitionId, this.options)
-                        .map(this.mapping.mapResponse)
+                        .map(processDefinitionMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
@@ -59,7 +63,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     //
     createCase(processId: string, contractValues: any): Observable<BonitaCreateCaseSuccessResponse> {
         let postUrl = this.resourceUrl + '/' + processId + '/instantiation'
-        return this.http.post(postUrl, contractValues, this.getSendRequestOptions(this.configService))
+        return this.http.post(postUrl, contractValues, this.sendOptions)
                         .map(this.mapCreateCaseSuccessResponse)
                         .catch(this.handleResponseError)
     }
