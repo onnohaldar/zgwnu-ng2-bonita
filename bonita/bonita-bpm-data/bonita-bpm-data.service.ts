@@ -30,7 +30,8 @@ export class BonitaBpmDataService extends BonitaRestApiService {
     ) 
     { 
         super()
-        console.log('BonitaBpmProcessService')
+        
+        // configure resource url
         this.caseVariableResourceUrl = bonitaConfigService.apiUrl + this.caseVariableResourcePath
     }
 
