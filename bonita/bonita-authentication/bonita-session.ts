@@ -13,7 +13,7 @@ export class BonitaSession {
     if (sessionData.tenant) { this.tenant = sessionData.tenant }
     let headers = headerData.toJSON()
     console.log(headers)
-    this.token = headers['X-Bonita-API-Token']
+    this.token = headers['X-Bonita-API-Token'][0]
   }
 
   user_id: string
@@ -23,5 +23,5 @@ export class BonitaSession {
   is_technical_user: boolean
   version: string
   tenant?: string
-  token?: string[]
+  token?: string
 }
