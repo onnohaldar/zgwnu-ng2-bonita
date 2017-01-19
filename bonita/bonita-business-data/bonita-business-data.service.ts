@@ -40,7 +40,7 @@ export class BonitaBusinessDataService extends BonitaRestApiService {
     //
     getBusinessData(businessDataObjectType: string, persistenceId: number, mappingParm?: BonitaDataMappingInterface): Observable<any> {
         let mapping = this.getMapping(mappingParm)
-        return this.http.get(this.buildGetRequestUrl(businessDataObjectType, persistenceId))
+        return this.http.get(this.buildGetRequestUrl(businessDataObjectType, persistenceId), this.options)
                         .map(mapping.mapResponse)
                         .catch(this.handleResponseError)
     }
@@ -61,7 +61,7 @@ export class BonitaBusinessDataService extends BonitaRestApiService {
     //
     queryBusinessData(businessDataObjectType: string, queryParms: BonitaBusinessDataQueryParms, mappingParm?: BonitaDataMappingInterface): Observable<any> {
         let mapping = this.getMapping(mappingParm)
-        return this.http.get(this.buildQueryRequestUrl(businessDataObjectType, queryParms))
+        return this.http.get(this.buildQueryRequestUrl(businessDataObjectType, queryParms), this.options)
                         .map(mapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
@@ -79,7 +79,7 @@ export class BonitaBusinessDataService extends BonitaRestApiService {
     //
     getBusinessDataFromContext(businessDataContext: BonitaBusinessDataContext, mappingParm?: BonitaDataMappingInterface): Observable<any> {
         let mapping = this.getMapping(mappingParm)
-        return this.http.get(this.buildGetFromContextUrl(businessDataContext))
+        return this.http.get(this.buildGetFromContextUrl(businessDataContext), this.options)
                         .map(mapping.mapResponse)
                         .catch(this.handleResponseError)
     }
