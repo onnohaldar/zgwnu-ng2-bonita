@@ -25,10 +25,15 @@ export abstract class BonitaRestApiService {
 
     protected mapping: BonitaDataMappingInterface = new BonitaDataMapping()
 
-    protected configSendOptions(configService: BonitaConfigService) {
+    protected appendConfigSendOptions(options: RequestOptions, configService: BonitaConfigService) {
         if (configService.sessionToken) {
-            this.sendOptions.headers.append('X-Bonita-API-Token', configService.sessionToken)
-        } 
+            options.headers.append('X-Bonita-API-Token', configService.sessionToken)
+        }
+        return options
+    }
+
+    protected configSendOptions(configService: BonitaConfigService) {
+        this.appendConfigSendOptions(this.sendOptions, configService)
     }
 
     protected mapSuccessResponse(res: Response) {

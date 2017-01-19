@@ -35,12 +35,11 @@ export class BonitaFileUploadService extends BonitaRestApiService {
         let formData: FormData = new FormData()
         formData.append(fileDescription, file, file.name)
 
-        let headers = new Headers()
-        headers.append('Accept', 'application/json')
+        let uploadOptions: RequestOptions = new RequestOptions()
+        uploadOptions.headers.append('Accept', 'application/json')
+        this.appendConfigSendOptions(uploadOptions, this.bonitaConfigService)
 
-        let options = new RequestOptions({ headers: headers })
-
-        return this.http.post(this.bonitaConfigService.fileUploadUrl, formData, options)
+        return this.http.post(this.bonitaConfigService.fileUploadUrl, formData, uploadOptions)
                         .map(this.mapFileUploadResponse)
                         .catch(this.handleResponseError)
     }
