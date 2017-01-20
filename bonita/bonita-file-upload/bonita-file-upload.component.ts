@@ -42,14 +42,13 @@ export class BonitaFileUploadComponent implements OnInit {
         console.log('onSelectFile')
         console.log(event)
         let file: File = event.target.files[0]
-//        let file: File = event.srcElement.files[0]
         console.log(file)
+        this.contractInputFile.filename = file.name
+        this.contractInputFile.contentType = file.type
 
         this.fileUploadService.uploadFile(file, 'Adviesrapport')
             .subscribe(
                 fileUploadResponse => {
-                    this.contractInputFile.filename = file.name
-                    this.contractInputFile.contentType = file.type
                     this.contractInputFile.tempPath = fileUploadResponse.tempPath
                 },
                 errorResponse => this.errorResponse = errorResponse
