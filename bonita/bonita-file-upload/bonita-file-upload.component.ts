@@ -1,6 +1,6 @@
 // imports generic angular 2 modules
 import { DomSanitizer } from '@angular/platform-browser'
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { MdIconRegistry } from '@angular/material'
 
 // imports bonita from library
@@ -21,6 +21,7 @@ export class BonitaFileUploadComponent implements OnInit {
     private fileIconsPath: string = this.iconsPath + 'file/'
 
     @Input() contractInputFile: BonitaContractInputFile
+    @Output() onFileSelected = new EventEmitter<BonitaContractInputFile>()
 
     errorResponse: BonitaErrorResponse
 
@@ -39,10 +40,7 @@ export class BonitaFileUploadComponent implements OnInit {
     }
   
     onSelectFile(event: any) {
-        console.log('onSelectFile')
-        console.log(event)
         let file: File = event.target.files[0]
-        console.log(file)
         this.contractInputFile.filename = file.name
         this.contractInputFile.contentType = file.type
 
@@ -50,6 +48,7 @@ export class BonitaFileUploadComponent implements OnInit {
             .subscribe(
                 fileUploadResponse => {
                     this.contractInputFile.tempPath = fileUploadResponse.tempPath
+                    this.onFileSelected.emit(this.contractInputFile)
                 },
                 errorResponse => this.errorResponse = errorResponse
             )
