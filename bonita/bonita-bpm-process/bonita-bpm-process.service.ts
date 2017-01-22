@@ -5,7 +5,7 @@
 //
 //
 import { Injectable } from '@angular/core'
-import { Http, Response } from '@angular/http'
+import { Http, Response, RequestOptions } from '@angular/http'
 
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
@@ -32,9 +32,6 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
 
         // configure resource urls
         this.resourceUrl = configService.apiUrl + this.resourcePath
-
-        // configure request sendOptions var (required for post, put, delete, save, ..)
-        this.configSendOptions(configService)
     }
 
     searchProcessDefinitions(searchParms: BonitaSearchParms): Observable<BonitaProcessDefinition[]> {
@@ -62,8 +59,9 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     // Post URL template: ../API/bpm/process/:processId/instantiation
     //
     createCase(processId: string, contractValues: any): Observable<BonitaCreateCaseSuccessResponse> {
-        let postUrl = this.resourceUrl + '/' + processId + '/instantiation'
-        return this.http.post(postUrl, contractValues, this.sendOptions)
+        let postUrl: string = this.resourceUrl + '/' + processId + '/instantiation'
+        let sendOptions: RequestOptions = this.getSendOptions(this.configService)
+        return this.http.post(postUrl, contractValues, sendOptions)
                         .map(this.mapCreateCaseSuccessResponse)
                         .catch(this.handleResponseError)
     }

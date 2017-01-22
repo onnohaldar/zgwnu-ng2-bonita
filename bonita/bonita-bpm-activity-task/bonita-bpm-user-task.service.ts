@@ -5,7 +5,7 @@
 //
 //
 import { Injectable } from '@angular/core'
-import { Http } from '@angular/http'
+import { Http, RequestOptions } from '@angular/http'
 
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
@@ -35,9 +35,6 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
 
         // configure resource urls
         this.userTaskResourceUrl = configService.apiUrl + this.userTaskResourcePath
-
-        // configure request sendOptions var (required for post, put, delete, save, ..)
-        this.configSendOptions(configService)
     }
 
     getUserTask(userTaskId: string): Observable<BonitaUserTask> {
@@ -57,7 +54,8 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
         let body: BonitaBpmTaskUpdateInput = new BonitaBpmTaskUpdateInput()
         body.assigned_id = userId
         let putUrl = this.userTaskResourceUrl + '/' + userTaskId
-        return this.http.put(putUrl, body, this.sendOptions)
+        let sendOptions: RequestOptions = this.getSendOptions(this.configService)
+        return this.http.put(putUrl, body, sendOptions)
                         .map(this.mapSuccessResponse)
                         .catch(this.handleResponseError)
 
@@ -65,7 +63,8 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
 
     executeUserTask(userTaskId: string, contractValues: any): Observable<BonitaResponse> {
         let postUrl = this.userTaskResourceUrl + '/' + userTaskId + '/execution'
-        return this.http.post(postUrl, contractValues, this.sendOptions)
+        let sendOptions: RequestOptions = this.getSendOptions(this.configService)
+        return this.http.post(postUrl, contractValues, sendOptions)
                         .map(this.mapSuccessResponse)
                         .catch(this.handleResponseError)
     }
