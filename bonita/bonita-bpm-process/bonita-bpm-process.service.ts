@@ -36,7 +36,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
 
     searchProcessDefinitions(searchParms: BonitaSearchParms): Observable<BonitaProcessDefinition[]> {
         let processDefinitionMapping: BonitaProcessDefinitionMapping = new BonitaProcessDefinitionMapping()
-        return this.http.get(this.buildSearchRequest(searchParms), this.options)
+        return this.http.get(this.buildSearchRequest(searchParms), this.configService.options)
                         .map(processDefinitionMapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
@@ -47,7 +47,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
 
     getProcessDefinition(processDefinitionId: string): Observable<BonitaProcessDefinition> {
         let processDefinitionMapping: BonitaProcessDefinitionMapping = new BonitaProcessDefinitionMapping()
-        return this.http.get(this.resourceUrl + '/' + processDefinitionId, this.options)
+        return this.http.get(this.resourceUrl + '/' + processDefinitionId, this.configService.options)
                         .map(processDefinitionMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
@@ -60,8 +60,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     //
     createCase(processId: string, contractValues: any): Observable<BonitaCreateCaseSuccessResponse> {
         let postUrl: string = this.resourceUrl + '/' + processId + '/instantiation'
-        let sendOptions: RequestOptions = this.getSendOptions(this.configService)
-        return this.http.post(postUrl, contractValues, sendOptions)
+        return this.http.post(postUrl, contractValues, this.configService.sendOptions)
                         .map(this.mapCreateCaseSuccessResponse)
                         .catch(this.handleResponseError)
     }

@@ -25,17 +25,17 @@ export class BonitaBpmActivityService extends BonitaRestApiService {
     private activityResourceUrl: string
 
     constructor(
-        private bonitaConfigService: BonitaConfigService,
+        private configService: BonitaConfigService,
         private http: Http
     ) 
     { 
         super()
-        this.activityResourceUrl = bonitaConfigService.apiUrl + this.activityResourcePath
+        this.activityResourceUrl = configService.apiUrl + this.activityResourcePath
     }
 
     searchActivities(searchParms: BonitaSearchParms): Observable<BonitaActivity[]> {
         let activityMapping: BonitaDataMappingInterface = new BonitaActivityMapping()
-        return this.http.get(this.buildActivitySearchRequest(searchParms), this.options)
+        return this.http.get(this.buildActivitySearchRequest(searchParms), this.configService.options)
                         .map(activityMapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
@@ -46,7 +46,7 @@ export class BonitaBpmActivityService extends BonitaRestApiService {
 
     getActivity(activityId: string): Observable<BonitaActivity> {
         let activityMapping: BonitaDataMappingInterface = new BonitaActivityMapping()
-        return this.http.get(this.activityResourceUrl + '/' + activityId, this.options)
+        return this.http.get(this.activityResourceUrl + '/' + activityId, this.configService.options)
                         .map(activityMapping.mapResponse)
                         .catch(this.handleResponseError)
     }

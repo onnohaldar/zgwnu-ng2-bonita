@@ -23,12 +23,12 @@ export class BonitaBusinessDataService extends BonitaRestApiService {
     private resourceUrl: string
 
     constructor(
-        private bonitaConfigService: BonitaConfigService,
+        private configService: BonitaConfigService,
         private http: Http
     ) 
     { 
         super()
-        this.resourceUrl = bonitaConfigService.apiUrl + this.resourcePath
+        this.resourceUrl = configService.apiUrl + this.resourcePath
     }
 
     // Bonita Rest Api Business Data
@@ -40,14 +40,14 @@ export class BonitaBusinessDataService extends BonitaRestApiService {
     //
     getBusinessData(businessDataObjectType: string, persistenceId: number, mappingParm?: BonitaDataMappingInterface): Observable<any> {
         let mapping = this.getMapping(mappingParm)
-        return this.http.get(this.buildGetRequestUrl(businessDataObjectType, persistenceId), this.options)
+        return this.http.get(this.buildGetRequestUrl(businessDataObjectType, persistenceId), this.configService.options)
                         .map(mapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
     protected buildGetRequestUrl(businessDataObjectType: string, persistenceId: number): string {
         return this.resourceUrl + '/businessData/' + 
-                this.bonitaConfigService.businessDataModelPackage + '.' + businessDataObjectType + 
+                this.configService.businessDataModelPackage + '.' + businessDataObjectType + 
                     '/' + persistenceId.toString()
     }
 
@@ -61,14 +61,14 @@ export class BonitaBusinessDataService extends BonitaRestApiService {
     //
     queryBusinessData(businessDataObjectType: string, queryParms: BonitaBusinessDataQueryParms, mappingParm?: BonitaDataMappingInterface): Observable<any> {
         let mapping = this.getMapping(mappingParm)
-        return this.http.get(this.buildQueryRequestUrl(businessDataObjectType, queryParms), this.options)
+        return this.http.get(this.buildQueryRequestUrl(businessDataObjectType, queryParms), this.configService.options)
                         .map(mapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
 
     protected buildQueryRequestUrl(businessDataObjectType: string, queryParms: BonitaBusinessDataQueryParms): string {
         return this.resourceUrl + '/businessData/' + 
-                this.bonitaConfigService.businessDataModelPackage + '.' + businessDataObjectType + 
+                this.configService.businessDataModelPackage + '.' + businessDataObjectType + 
                     '?' + queryParms.getUrlEncondedParms()
     }
 
@@ -79,13 +79,13 @@ export class BonitaBusinessDataService extends BonitaRestApiService {
     //
     getBusinessDataFromContext(businessDataContext: BonitaBusinessDataContext, mappingParm?: BonitaDataMappingInterface): Observable<any> {
         let mapping = this.getMapping(mappingParm)
-        return this.http.get(this.buildGetFromContextUrl(businessDataContext), this.options)
+        return this.http.get(this.buildGetFromContextUrl(businessDataContext), this.configService.options)
                         .map(mapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
     protected buildGetFromContextUrl(businessDataContext: BonitaBusinessDataContext): string {
-        return this.bonitaConfigService.baseUrl + '/' + businessDataContext.link
+        return this.configService.baseUrl + '/' + businessDataContext.link
     }
 
     private getMapping(mappingParm?: BonitaDataMappingInterface): BonitaDataMappingInterface {

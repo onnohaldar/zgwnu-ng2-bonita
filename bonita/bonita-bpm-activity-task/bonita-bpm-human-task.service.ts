@@ -25,17 +25,17 @@ export class BonitaBpmHumanTaskService extends BonitaRestApiService {
     private humanTaskResourceUrl: string
 
     constructor(
-        private bonitaConfigService: BonitaConfigService,
+        private configService: BonitaConfigService,
         private http: Http
     ) 
     { 
         super()
-        this.humanTaskResourceUrl = bonitaConfigService.apiUrl + this.humanTaskResourcePath
+        this.humanTaskResourceUrl = configService.apiUrl + this.humanTaskResourcePath
     }
 
     searchHumanTasks(searchParms: BonitaSearchParms): Observable<BonitaHumanTask[]> {
         let humanTaskMapping: BonitaDataMappingInterface = new BonitaHumanTaskMapping()
-        return this.http.get(this.buildHumanTaskSearchRequest(searchParms), this.options)
+        return this.http.get(this.buildHumanTaskSearchRequest(searchParms), this.configService.options)
                         .map(humanTaskMapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
@@ -46,7 +46,7 @@ export class BonitaBpmHumanTaskService extends BonitaRestApiService {
 
     getHumanTask(humanTaskId: string): Observable<BonitaHumanTask> {
         let humanTaskMapping: BonitaDataMappingInterface = new BonitaHumanTaskMapping()
-        return this.http.get(this.humanTaskResourceUrl + '/' + humanTaskId, this.options)
+        return this.http.get(this.humanTaskResourceUrl + '/' + humanTaskId, this.configService.options)
                         .map(humanTaskMapping.mapResponse)
                         .catch(this.handleResponseError)
     }

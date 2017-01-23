@@ -25,14 +25,14 @@ export class BonitaBpmDataService extends BonitaRestApiService {
     private caseVariableResourceUrl: string
 
     constructor(
-        private bonitaConfigService: BonitaConfigService,
+        private configService: BonitaConfigService,
         private http: Http
     ) 
     { 
         super()
         
         // configure resource url
-        this.caseVariableResourceUrl = bonitaConfigService.apiUrl + this.caseVariableResourcePath
+        this.caseVariableResourceUrl = configService.apiUrl + this.caseVariableResourcePath
     }
 
     // CaseVariable
@@ -42,14 +42,14 @@ export class BonitaBpmDataService extends BonitaRestApiService {
     //
     getCaseVariable(caseId: string, variableName: string): Observable<BonitaCaseVariable> {
         let caseVariableMapping: BonitaDataMappingInterface = new BonitaCaseVariableMapping()
-        return this.http.get(this.caseVariableResourceUrl + '/' + caseId + '/' + variableName)
+        return this.http.get(this.caseVariableResourceUrl + '/' + caseId + '/' + variableName, this.configService.options)
                         .map(caseVariableMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
     
     searchCaseVariables(searchParms: BonitaSearchParms): Observable<BonitaCaseVariable[]> {
         let caseVariableMapping: BonitaDataMappingInterface = new BonitaCaseVariableMapping()
-        return this.http.get(this.buildSearchRequest(searchParms))
+        return this.http.get(this.buildSearchRequest(searchParms), this.configService.options)
                         .map(caseVariableMapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }

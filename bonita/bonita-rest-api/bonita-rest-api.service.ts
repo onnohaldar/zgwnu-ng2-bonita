@@ -19,26 +19,7 @@ import { BonitaErrorResponse } from './bonita-error-response'
 @Injectable()
 export abstract class BonitaRestApiService {
     
-    protected headers: Headers = new Headers({ 'Content-Type': 'application/json' })
-    protected options: RequestOptions = new RequestOptions({ headers: this.headers })
-
     protected mapping: BonitaDataMappingInterface = new BonitaDataMapping()
-
-    protected getSendOptions(configService: BonitaConfigService) {
-        let options: RequestOptions = new RequestOptions({ headers: this.headers })
-        this.appendConfigSendOptions(options, configService)
-        return options
-    }
-
-    protected appendConfigSendOptions(options: RequestOptions, configService: BonitaConfigService) {
-        if (configService.session) {
-            if (configService.sessionToken) {
-                options.headers.append('X-Bonita-API-Token', configService.sessionToken)
-            }
-        } else {
-            console.log('BonitaRestApiService.appendConfigSendOptions WARNING: Session NOT Configured!')
-        }
-    }
 
     protected mapSuccessResponse(res: Response) {
         let successResponse = new BonitaResponse()

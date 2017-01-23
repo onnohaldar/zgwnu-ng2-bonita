@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Location } from '@angular/common'
+import { Headers, RequestOptions } from '@angular/http'
 
 import { BonitaSession } from '../bonita-authentication/bonita-session'
 
@@ -19,39 +20,48 @@ export class BonitaConfigService {
     apiUrl: string = this.baseUrl + this.apiPath
     fileUploadUrl: string = this.baseUrl + this.fileUploadPath
 
+    // rest api options
+    readonly bonitaSessionTokenKey: string = 'X-Bonita-API-Token'
+    headers: Headers = new Headers({ 'Content-Type': 'application/json' })
+    options: RequestOptions = new RequestOptions({ headers: this.headers })
+    sendOptions: RequestOptions = new RequestOptions({ headers: this.headers })
+
     // current session
-    private _session: BonitaSession
-    
-    set session(session: BonitaSession) {
-        this._session = session
-    }
-
-    get session(): BonitaSession {
-        return this._session
-    }
-
-    get sessionToken(): string {
-        // CSRF token current session
-        return this._session.token
-    }
+    session: BonitaSession
 
     constructor (
         location: Location)
-    {}
+    {
+    }
 
-    initBonitaConfig() {
+    initialize() {
         
         if (location.hostname != 'localhost') {
-            this.buildExternalConfig()
+            this.initExternalUrls()
         }
 
     }
 
-    private buildExternalConfig() {
+    private initExternalUrls() {
         this.hostUrl = location.origin;    
         this.baseUrl = this.hostUrl + this.basePath;
         this.apiUrl = this.baseUrl + this.apiPath;
         this.fileUploadUrl = this.baseUrl + this.fileUploadPath;
     }
+
+    initSendOptions() {
+        this.appendConfigSendOptions(this.sendOptions)
+    }
+
+    appendConfigSendOptions(options: RequestOptions) {
+        if (this.session) {
+            if (this.session.token) {
+                options.headers.append(this.bonitaSessionTokenKey, this.session.token)
+            }
+        } else {
+            console.log('BonitaConfigService.appendConfigSendOptions WARNING: Session NOT Configured!')
+        }
+    }
+
 
 }

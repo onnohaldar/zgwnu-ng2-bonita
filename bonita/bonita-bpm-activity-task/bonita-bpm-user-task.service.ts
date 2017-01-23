@@ -5,7 +5,7 @@
 //
 //
 import { Injectable } from '@angular/core'
-import { Http, RequestOptions } from '@angular/http'
+import { Http } from '@angular/http'
 
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
@@ -39,13 +39,13 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
 
     getUserTask(userTaskId: string): Observable<BonitaUserTask> {
         let userTaskMapping: BonitaDataMappingInterface = new BonitaUserTaskMapping()
-        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId, this.options)
+        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId, this.configService.options)
                         .map(userTaskMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
     getUserTaskContext(userTaskId: string): Observable<any> {
-        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId + '/context', this.options)
+        return this.http.get(this.userTaskResourceUrl + '/' + userTaskId + '/context', this.configService.options)
                         .map(this.mapping.mapResponse)
                         .catch(this.handleResponseError)
     }
@@ -54,8 +54,7 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
         let body: BonitaBpmTaskUpdateInput = new BonitaBpmTaskUpdateInput()
         body.assigned_id = userId
         let putUrl = this.userTaskResourceUrl + '/' + userTaskId
-        let sendOptions: RequestOptions = this.getSendOptions(this.configService)
-        return this.http.put(putUrl, body, sendOptions)
+        return this.http.put(putUrl, body, this.configService.sendOptions)
                         .map(this.mapSuccessResponse)
                         .catch(this.handleResponseError)
 
@@ -63,8 +62,7 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
 
     executeUserTask(userTaskId: string, contractValues: any): Observable<BonitaResponse> {
         let postUrl = this.userTaskResourceUrl + '/' + userTaskId + '/execution'
-        let sendOptions: RequestOptions = this.getSendOptions(this.configService)
-        return this.http.post(postUrl, contractValues, sendOptions)
+        return this.http.post(postUrl, contractValues, this.configService.sendOptions)
                         .map(this.mapSuccessResponse)
                         .catch(this.handleResponseError)
     }
