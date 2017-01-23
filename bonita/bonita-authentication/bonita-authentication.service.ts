@@ -64,7 +64,6 @@ export class BonitaAuthenticationService extends BonitaRestApiService {
                             session => {
                                  if (creds.username == session.user_name) {
                                      this.configService.session = session
-                                     this.configService.initSendOptions()
                                      if (creds.navigateTo) { this.router.navigate([creds.navigateTo]) }
                                  }
                             },

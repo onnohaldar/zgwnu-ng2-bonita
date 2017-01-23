@@ -2,10 +2,12 @@ export abstract class BonitaBusinessDataObject {
 
   constructor(objectData: any)
   {
-    this.persistenceId = objectData.persistenceId
-    this.persistenceId_string = objectData.persistenceId_string
-    this.persistenceVersion = objectData.persistenceVersion
-    this.persistenceVersion_string = objectData.persistenceVersion_string
+    if (objectData) {
+      if (objectData.persistenceId) { this.persistenceId = objectData.persistenceId }
+      if (objectData.persistenceId_string) { this.persistenceId_string = objectData.persistenceId_string }
+      if (objectData.persistenceVersion) { this.persistenceVersion = objectData.persistenceVersion }
+      if (objectData.persistenceVersion_string) { this.persistenceVersion_string = objectData.persistenceVersion_string }
+    }
   }
 
   persistenceId: number;

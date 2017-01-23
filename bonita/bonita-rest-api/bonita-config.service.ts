@@ -24,14 +24,15 @@ export class BonitaConfigService {
     readonly bonitaSessionTokenKey: string = 'X-Bonita-API-Token'
     headers: Headers = new Headers({ 'Content-Type': 'application/json' })
     options: RequestOptions = new RequestOptions({ headers: this.headers })
-    sendOptions: RequestOptions = new RequestOptions({ headers: this.headers })
+    sendOptions: RequestOptions
 
     // current session
-    session: BonitaSession
+    private _session: BonitaSession
 
     constructor (
         location: Location)
     {
+        this.initialize()
     }
 
     initialize() {
@@ -49,17 +50,15 @@ export class BonitaConfigService {
         this.fileUploadUrl = this.baseUrl + this.fileUploadPath;
     }
 
-    initSendOptions() {
+    set session(session: BonitaSession) {
+        this._session = session
+        this.sendOptions = new RequestOptions({ headers: this.headers })
         this.appendConfigSendOptions(this.sendOptions)
     }
 
     appendConfigSendOptions(options: RequestOptions) {
-        if (this.session) {
-            if (this.session.token) {
-                options.headers.append(this.bonitaSessionTokenKey, this.session.token)
-            }
-        } else {
-            console.log('BonitaConfigService.appendConfigSendOptions WARNING: Session NOT Configured!')
+        if (this._session.token) {
+            options.headers.append(this.bonitaSessionTokenKey, this._session.token)
         }
     }
 
