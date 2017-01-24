@@ -1,18 +1,19 @@
-#Angular 2 Lib Bonita BPM Rest Api Lib
+#Angular 2 Library with bonita BPM Rest Api functionality
 
 This library contains Angular 2 for TypeScript classes that ZaakgerichtWerken.nu will use to create BPM application examples. 
 In this initial very Alpha-0 version we just started to understand how to use Angular 2 TypeScript from scratch. We hope that more
 experienced developers can help us to improve this good intented initiative.
 
 ##Requirements
-* Angular 2.x
-* Angular 2.x Material
-* TypeScript version 2.0.1
+* See package.json (Angular 2.4.x, Angular Material 2.0.0-beta-1, Typescript 2.0.10, etc.)
 * Bonita BPM Community 7.3.2 > or higher (never tested on Commercial Licensed versions)
+
+##Quickstart
+To see how you can use the library. Look at out testApp 
 
 ##Library content
 ### bonita
-Every Angular 2 TypScript Class that we did develop to use the Bonita BPM Rest Api so far. 
+Every Angular 2 TypScript Class that created to use the Bonita BPM Rest Api. 
 #### bonita-rest-api
 All basic Bonita Rest Api classes and settings that will be (re)used.
 #### bonita-authentication
