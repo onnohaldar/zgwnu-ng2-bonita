@@ -56,6 +56,10 @@ export class BonitaConfigService {
         this.appendConfigSendOptions(this.sendOptions)
     }
 
+    get session() {
+        return this._session
+    }
+
     appendConfigSendOptions(options: RequestOptions) {
         if (this._session.token) {
             options.headers.append(this.bonitaSessionTokenKey, this._session.token)
