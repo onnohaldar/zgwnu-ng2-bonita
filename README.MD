@@ -9,7 +9,7 @@ experienced developers can help us to improve this good intented initiative.
 * Bonita BPM Community 7.3.2 > or higher (never tested on Commercial Licensed versions)
 
 ##Quickstart
-To see how you can use the library. Look at out testApp 
+To see how you can use the library. Look at out testApp https://github.com/onnohaldar/zgwnu-ng2-bonita-testapp
 
 ##Library content
 ### bonita
