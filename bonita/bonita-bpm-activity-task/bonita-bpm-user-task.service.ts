@@ -18,7 +18,6 @@ import { BonitaBpmTaskUpdateInput } from './bonita-bpm-task-update-input'
 import { BonitaUserTask } from './bonita-user-task'
 import { BonitaUserTaskMapping } from './bonita-user-task-mapping'
 import { BonitaResponse } from '../bonita-rest-api/bonita-response'
-import { BonitaAuthenticationService } from '../bonita-authentication/bonita-authentication.service'
 
 @Injectable()
 export class BonitaBpmUserTaskService extends BonitaRestApiService {
@@ -27,7 +26,6 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
 
     constructor(
         private configService: BonitaConfigService,
-        private authenticationService: BonitaAuthenticationService,
         private http: Http
     ) 
     { 
@@ -50,9 +48,17 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
                         .catch(this.handleResponseError)
     }
 
-    assignUserTask(userTaskId: string, userId: string): Observable<BonitaResponse> {
+    assignUserTask(userTaskId: string, userId?: string): Observable<BonitaResponse> {
         let body: BonitaBpmTaskUpdateInput = new BonitaBpmTaskUpdateInput()
-        body.assigned_id = userId
+
+        if (userId) {
+            // assign to specified user
+            body.assigned_id = userId
+        } else {
+            // assign to current logged user
+            body.assigned_id = this.configService.session.user_id
+        }
+
         let putUrl = this.userTaskResourceUrl + '/' + userTaskId
         return this.http.put(putUrl, body, this.configService.sendOptions)
                         .map(this.mapSuccessResponse)
