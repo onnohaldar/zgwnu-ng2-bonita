@@ -22,8 +22,8 @@ export class BonitaConfigService {
 
     // rest api options
     readonly bonitaSessionTokenKey: string = 'X-Bonita-API-Token'
-    headers: Headers = new Headers({ 'Content-Type': 'application/json' })
-    options: RequestOptions = new RequestOptions({ headers: this.headers })
+    private defaultHeaders: Headers = new Headers({ 'Content-Type': 'application/json' })
+    options: RequestOptions = new RequestOptions({ headers: this.defaultHeaders })
     sendOptions: RequestOptions
 
     // current session
@@ -38,12 +38,12 @@ export class BonitaConfigService {
     initialize() {
         
         if (location.hostname != 'localhost') {
-            this.initExternalUrls()
+            this.configExternalUrls()
         }
 
     }
 
-    private initExternalUrls() {
+    private configExternalUrls() {
         this.hostUrl = location.origin;    
         this.baseUrl = this.hostUrl + this.basePath;
         this.apiUrl = this.baseUrl + this.apiPath;
@@ -52,17 +52,22 @@ export class BonitaConfigService {
 
     set session(session: BonitaSession) {
         this._session = session
-        this.sendOptions = new RequestOptions({ headers: this.headers })
-        this.appendConfigSendOptions(this.sendOptions)
+        this.configSendOptions()
     }
 
     get session() {
         return this._session
     }
 
-    appendConfigSendOptions(options: RequestOptions) {
+    private configSendOptions() {
+        let defaultSendHeaders: Headers = new Headers({ 'Content-Type': 'application/json' })
+        this.sendOptions = new RequestOptions({ headers: defaultSendHeaders })
+        this.appendSessionOptions(this.sendOptions)
+    }
+
+    appendSessionOptions(optionsRef: RequestOptions) {
         if (this._session.token) {
-            options.headers.append(this.bonitaSessionTokenKey, this._session.token)
+            optionsRef.headers.append(this.bonitaSessionTokenKey, this._session.token)
         }
     }
 
