@@ -5,7 +5,7 @@ In this initial very Alpha-0 version we just started to understand how to use An
 experienced developers can help us to improve this good intented initiative.
 
 ##Requirements
-* See package.json (Angular 2.4.x, Angular Material 2.0.0-beta-1, Typescript 2.0.10, etc.)
+* See package.json in the testApp (see Quickstart)
 * Bonita BPM Community 7.3.2 > or higher (never tested on Commercial Licensed versions)
 
 ##Quickstart
