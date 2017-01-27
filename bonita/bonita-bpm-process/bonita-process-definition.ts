@@ -5,7 +5,7 @@ export class BonitaProcessDefinition {
   constructor(processDefinitionData: any) 
   {
     const utils = new BonitaUtils()
-    console.log(processDefinitionData)
+
     this.id = processDefinitionData.id
     this.icon = processDefinitionData.icon
     this.displayDescription = processDefinitionData.displayDescription

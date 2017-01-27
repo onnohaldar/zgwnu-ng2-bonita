@@ -21,6 +21,10 @@ export { BonitaHumanTask } from './bonita/bonita-bpm-activity-task/bonita-human-
 export { BonitaTask } from './bonita/bonita-bpm-activity-task/bonita-task'
 export { BonitaUserTask } from './bonita/bonita-bpm-activity-task/bonita-user-task'
 
+// Bonita Rest Api BPM case
+export { BonitaBpmCaseService } from './bonita/bonita-bpm-case/bonita-bpm-case.service'
+export { BonitaCase } from './bonita/bonita-bpm-case/bonita-case'
+
 // Bonita Rest Api BPM Data
 export { BonitaBpmDataService } from './bonita/bonita-bpm-data/bonita-bpm-data.service'
 export { BonitaCaseVariable } from './bonita/bonita-bpm-data/bonita-case-variable'
