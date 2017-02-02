@@ -21,6 +21,7 @@ export class BonitaFileUploadComponent implements OnInit {
     private fileIconsPath: string = this.iconsPath + 'file/'
 
     @Input() contractInputFile: BonitaContractInputFile
+    @Input() contractInputFileId: string 
     @Output() onFileSelected = new EventEmitter<BonitaContractInputFile>()
 
     errorResponse: BonitaErrorResponse
