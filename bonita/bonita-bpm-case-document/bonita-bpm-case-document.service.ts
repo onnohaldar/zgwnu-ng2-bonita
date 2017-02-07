@@ -4,6 +4,7 @@
 // based on http://documentation.bonitasoft.com/?page=bpm-api#toc17
 //
 //
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { Injectable } from '@angular/core'
 import { Http, Response } from '@angular/http'
 
@@ -26,7 +27,8 @@ export class BonitaBpmDocumentService extends BonitaRestApiService {
 
     constructor(
         private configService: BonitaConfigService,
-        private http: Http
+        private http: Http, 
+        private sanitizer: DomSanitizer, 
     ) 
     { 
         super()
@@ -67,6 +69,11 @@ export class BonitaBpmDocumentService extends BonitaRestApiService {
 
     private buildSearchRequest(searchParms: BonitaSearchParms): string {
         return this.resourceUrl + '?' + searchParms.getUrlEncondedParms()
+    }
+
+    getDocumentSafeResourceUrl(documentId: string): SafeResourceUrl {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(
+            this.configService.formsDocumentImageUrl + "?document=" + documentId)
     }
 
 }

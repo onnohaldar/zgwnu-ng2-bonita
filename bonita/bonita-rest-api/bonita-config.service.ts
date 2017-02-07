@@ -13,12 +13,14 @@ export class BonitaConfigService {
     private basePath: string = '/bonita'
     private apiPath: string = '/API'
     private fileUploadPath: string = '/portal/fileUpload'
+    private formsDocumentImagePath: string = 'portal/formsDocumentImage'
     
     // default local server configuration
     hostUrl: string = 'http://localhost:8080' 
     baseUrl: string = this.hostUrl + this.basePath
     apiUrl: string = this.baseUrl + this.apiPath
     fileUploadUrl: string = this.baseUrl + this.fileUploadPath
+    formsDocumentImageUrl: string = this.baseUrl + this.formsDocumentImagePath
 
     // rest api options
     readonly bonitaSessionTokenKey: string = 'X-Bonita-API-Token'
@@ -44,10 +46,11 @@ export class BonitaConfigService {
     }
 
     private configExternalUrls() {
-        this.hostUrl = location.origin;    
-        this.baseUrl = this.hostUrl + this.basePath;
-        this.apiUrl = this.baseUrl + this.apiPath;
-        this.fileUploadUrl = this.baseUrl + this.fileUploadPath;
+        this.hostUrl = location.origin 
+        this.baseUrl = this.hostUrl + this.basePath
+        this.apiUrl = this.baseUrl + this.apiPath
+        this.fileUploadUrl = this.baseUrl + this.fileUploadPath
+        this.formsDocumentImageUrl = this.baseUrl + this.formsDocumentImagePath
     }
 
     set session(session: BonitaSession) {
