@@ -1,17 +1,21 @@
+import { BonitaUtils } from '../bonita-rest-api/bonita-utils'
+
 export class BonitaCase {
 
     constructor(caseData: any)
     {
+        const utils = new BonitaUtils()
+
         this.id = caseData.id
-        this.end_date = caseData.end_date
+        this.end_date = utils.getDateValue(caseData.end_date)
         this.failedFlowNodes = caseData.failedFlowNodes
-        this.start = caseData.start
+        this.start = utils.getDateValue(caseData.start)
         this.activeFlowNodes = caseData.activeFlowNodes
         this.state = caseData.state
         this.rootCaseId = caseData.rootCaseId
         this.started_by = caseData.started_by
         this.processDefinitionId = caseData.processDefinitionId
-        this.last_update_date = caseData.last_update_date
+        this.last_update_date = utils.getDateValue(caseData.last_update_date)
         if (caseData.searchIndex1Label) { this.searchIndex1Label = caseData.searchIndex1Label }
         if (caseData.searchIndex2Label) { this.searchIndex2Label = caseData.searchIndex2Label }
         if (caseData.searchIndex3Label) { this.searchIndex3Label = caseData.searchIndex2Label }
