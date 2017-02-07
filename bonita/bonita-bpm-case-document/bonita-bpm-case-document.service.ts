@@ -71,7 +71,7 @@ export class BonitaBpmDocumentService extends BonitaRestApiService {
         return this.resourceUrl + '?' + searchParms.getUrlEncondedParms()
     }
 
-    getDocumentSafeResourceUrl(documentId: string): SafeResourceUrl {
+    getSafeResourceDocumentImageUrl(documentId: string): SafeResourceUrl {
         return this.sanitizer.bypassSecurityTrustResourceUrl(
             this.configService.formsDocumentImageUrl + "?document=" + documentId)
     }
