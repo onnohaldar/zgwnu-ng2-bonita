@@ -45,7 +45,7 @@ export class BonitaFileUploadComponent implements OnInit {
         this.contractInputFile.filename = file.name
         this.contractInputFile.contentType = file.type
 
-        this.fileUploadService.uploadFile(file, 'Adviesrapport')
+        this.fileUploadService.uploadFile(file, this.contractInputFileId)
             .subscribe(
                 fileUploadResponse => {
                     this.contractInputFile.tempPath = fileUploadResponse.tempPath
