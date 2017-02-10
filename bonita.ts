@@ -26,10 +26,10 @@ export { BonitaBpmCaseService } from './bonita/bonita-bpm-case/bonita-bpm-case.s
 export { BonitaCase } from './bonita/bonita-bpm-case/bonita-case'
 
 // Bonita Rest Api BPM Case Document
-import { BonitaBpmDocumentService } from './bonita/bonita-bpm-case-document/bonita-bpm-case-document.service'
-import { BonitaDocument } from './bonita/bonita-bpm-case-document/bonita-document'
-import { BonitaDocumentCreateInput } from './bonita/bonita-bpm-case-document/bonita-document-create-input'
-import { BonitaDocumentUpdateInput } from './bonita/bonita-bpm-case-document/bonita-document-update-input'
+export { BonitaBpmCaseDocumentService } from './bonita/bonita-bpm-case-document/bonita-bpm-case-document.service'
+export { BonitaDocument } from './bonita/bonita-bpm-case-document/bonita-document'
+export { BonitaDocumentCreateInput } from './bonita/bonita-bpm-case-document/bonita-document-create-input'
+export { BonitaDocumentUpdateInput } from './bonita/bonita-bpm-case-document/bonita-document-update-input'
 
 // Bonita Rest Api BPM Data
 export { BonitaBpmDataService } from './bonita/bonita-bpm-data/bonita-bpm-data.service'

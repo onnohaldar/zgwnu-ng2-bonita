@@ -21,7 +21,7 @@ import { BonitaDocumentCreateInput } from './bonita-document-create-input'
 import { BonitaDocumentUpdateInput } from './bonita-document-update-input'
 
 @Injectable()
-export class BonitaBpmDocumentService extends BonitaRestApiService {
+export class BonitaBpmCaseDocumentService extends BonitaRestApiService {
     private resourcePath: string = '/bpm/caseDocument'
     private resourceUrl: string
 
@@ -39,15 +39,13 @@ export class BonitaBpmDocumentService extends BonitaRestApiService {
 
     createDocument(documentCreateInput: BonitaDocumentCreateInput): Observable<BonitaDocument> {
         let documentMapping: BonitaDocumentMapping = new BonitaDocumentMapping()
-        let postUrl: string = this.resourceUrl
-        return this.http.post(postUrl, documentCreateInput, this.configService.sendOptions)
+        return this.http.post(this.resourceUrl, documentCreateInput, this.configService.sendOptions)
                         .map(documentMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
     updateDocument(documentId: string, documentUpdateInput: BonitaDocumentUpdateInput): Observable<BonitaDocument> {
         let documentMapping: BonitaDocumentMapping = new BonitaDocumentMapping()
-        let putUrl: string = this.resourceUrl
         return this.http.put(this.resourceUrl + '/' + documentId, documentUpdateInput, this.configService.sendOptions)
                         .map(documentMapping.mapResponse)
                         .catch(this.handleResponseError)
@@ -71,7 +69,7 @@ export class BonitaBpmDocumentService extends BonitaRestApiService {
         return this.resourceUrl + '?' + searchParms.getUrlEncondedParms()
     }
 
-    getSafeResourceDocumentImageUrl(documentId: string): SafeResourceUrl {
+    getSafeFormsDocumentImageUrl(documentId: string): SafeResourceUrl {
         return this.sanitizer.bypassSecurityTrustResourceUrl(
             this.configService.formsDocumentImageUrl + "?document=" + documentId)
     }
