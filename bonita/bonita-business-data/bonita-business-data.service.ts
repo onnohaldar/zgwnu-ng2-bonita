@@ -16,6 +16,8 @@ import { BonitaDataMapping } from '../bonita-rest-api/bonita-data-mapping'
 import { BonitaConfigService } from '../bonita-rest-api/bonita-config.service'
 import { BonitaBusinessDataQueryParms } from './bonita-business-data-query-parms'
 import { BonitaBusinessDataContext } from './bonita-business-data-context'
+import { SingleBusinessDataRefence } from './single-business-data-reference'
+import { MultipleBusinessDataRefence } from './multiple-business-data-reference'
 
 @Injectable()
 export class BonitaBusinessDataService extends BonitaRestApiService {
@@ -94,6 +96,37 @@ export class BonitaBusinessDataService extends BonitaRestApiService {
         } else {
             return this.mapping
         }
+    }
+
+    // Bonita Rest Api get Business Data from context
+    // --------------------------------------------------------------------------
+    //    
+    // base on http://documentation.bonitasoft.com/?page=bdm-api#toc2
+    //
+    private getSingleBusinessDataReference(caseId: string, businessDataObjectType: string): Observable<SingleBusinessDataRefence> {
+        return this.getBusinessDataReference(caseId, businessDataObjectType)
+                    .map(this.mapSingleBusinessDataReference)
+                    .catch(this.handleResponseError)
+    }
+
+    private mapSingleBusinessDataReference(res: Response) {
+        let dataReference: SingleBusinessDataRefence = new SingleBusinessDataRefence(res.json())
+        return dataReference
+    }
+
+    private getMultipleBusinessDataReference(caseId: string, businessDataObjectType: string): Observable<MultipleBusinessDataRefence> {
+        return this.getBusinessDataReference(caseId, businessDataObjectType)
+                    .map(this.mapSingleBusinessDataReference)
+                    .catch(this.handleResponseError)
+    }
+
+    private mapMultipleBusinessDataReference(res: Response) {
+        let dataReference: MultipleBusinessDataRefence = new MultipleBusinessDataRefence(res.json())
+        return dataReference
+    }
+
+    private getBusinessDataReference(caseId: string, businessDataObjectType: string): Observable<any> {
+        return this.http.get(this.resourceUrl + '/businessDataReference/' + caseId + '/' + businessDataObjectType, this.configService.options)
     }
 
 }
