@@ -13,7 +13,7 @@ export class BonitaConfigService {
     private basePath: string = '/bonita'
     private apiPath: string = '/API'
     private fileUploadPath: string = '/portal/fileUpload'
-    private formsDocumentImagePath: string = 'portal/formsDocumentImage'
+    private formsDocumentImagePath: string = '/portal/formsDocumentImage'
     
     // default local server configuration
     hostUrl: string = 'http://localhost:8080' 
