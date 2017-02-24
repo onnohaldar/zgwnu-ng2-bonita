@@ -32,6 +32,8 @@ export class ToolbarComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl(this.navigationIconsPath + 'ic_cancel_24px.svg'))
     mdIconRegistry.addSvgIconInNamespace('toolbar', 'menu', 
       sanitizer.bypassSecurityTrustResourceUrl(this.navigationIconsPath + 'ic_menu_24px.svg'))
+    mdIconRegistry.addSvgIconInNamespace('toolbar', 'send', 
+      sanitizer.bypassSecurityTrustResourceUrl(this.contentIconsPath + 'ic_send_24px.svg'))
   }
 
   ngOnInit():void {
@@ -53,5 +55,10 @@ export class ToolbarComponent implements OnInit {
   onClickMenu() {
     this.toolbarService.componentReference.onToolbarClickMenu()
   }
-  
+
+  onClickSend() {
+    this.toolbarService.componentReference.onToolbarClickSend()
+  }
+
+
 }

@@ -17,6 +17,14 @@
   </span>
 
   <span>
+    <button *ngIf="toolbarService.sendButton.active" md-icon-button (click)="onClickSave()"
+      mdTooltip="{{toolbarService.sendButton.tooltip}}" 
+      [mdTooltipPosition]="toolbarService.sendButton.tooltipPosition">
+      <md-icon class="md-24" svgIcon="toolbar:send"></md-icon>
+    </button>
+  </span>
+
+  <span>
     <button *ngIf="toolbarService.cancelButton.active" md-icon-button (click)="onClickCancel()"
       mdTooltip="{{toolbarService.cancelButton.tooltip}}" 
       [mdTooltipPosition]="toolbarService.cancelButton.tooltipPosition">

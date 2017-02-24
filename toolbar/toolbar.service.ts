@@ -11,6 +11,7 @@ export class ToolbarService {
 
     menuButton: ToolbarButtonProperties = new ToolbarButtonProperties(true, 'menu')
     saveButton: ToolbarButtonProperties = new ToolbarButtonProperties(false, 'save')
+    sendButton: ToolbarButtonProperties = new ToolbarButtonProperties(false, 'send')
     cancelButton: ToolbarButtonProperties = new ToolbarButtonProperties(false, 'cancel')
 
     exitButton: ToolbarButtonProperties = new ToolbarButtonProperties(true, 'exit')
