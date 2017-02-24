@@ -1,5 +1,6 @@
 export class ToolbarButtonProperties {
     active: boolean
+    disabled: boolean = false
     tooltip: string
     tooltipPosition: string = 'below'
     // "above"|"below"|"before"|"after"

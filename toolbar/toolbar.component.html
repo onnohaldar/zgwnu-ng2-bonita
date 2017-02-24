@@ -3,7 +3,8 @@
   <span>
     <button *ngIf="toolbarService.menuButton.active" md-icon-button (click)="onClickMenu()"
       mdTooltip="{{toolbarService.menuButton.tooltip}}" 
-      [mdTooltipPosition]="toolbarService.menuButton.tooltipPosition">
+      [mdTooltipPosition]="toolbarService.menuButton.tooltipPosition"
+      [disabled]="toolbarService.menuButton.disabled">
       <md-icon class="md-24" svgIcon="toolbar:menu"></md-icon>
     </button>
   </span>
@@ -11,7 +12,8 @@
   <span>
     <button *ngIf="toolbarService.saveButton.active" md-icon-button (click)="onClickSave()"
       mdTooltip="{{toolbarService.saveButton.tooltip}}" 
-      [mdTooltipPosition]="toolbarService.saveButton.tooltipPosition">
+      [mdTooltipPosition]="toolbarService.saveButton.tooltipPosition"
+      [disabled]="toolbarService.saveButton.disabled">
       <md-icon class="md-24" svgIcon="toolbar:save"></md-icon>
     </button>
   </span>
@@ -19,7 +21,8 @@
   <span>
     <button *ngIf="toolbarService.sendButton.active" md-icon-button (click)="onClickSave()"
       mdTooltip="{{toolbarService.sendButton.tooltip}}" 
-      [mdTooltipPosition]="toolbarService.sendButton.tooltipPosition">
+      [mdTooltipPosition]="toolbarService.sendButton.tooltipPosition"
+      [disabled]="toolbarService.sendButton.disabled">
       <md-icon class="md-24" svgIcon="toolbar:send"></md-icon>
     </button>
   </span>
@@ -27,7 +30,8 @@
   <span>
     <button *ngIf="toolbarService.cancelButton.active" md-icon-button (click)="onClickCancel()"
       mdTooltip="{{toolbarService.cancelButton.tooltip}}" 
-      [mdTooltipPosition]="toolbarService.cancelButton.tooltipPosition">
+      [mdTooltipPosition]="toolbarService.cancelButton.tooltipPosition"
+      [disabled]="toolbarService.cancelButton.disabled">
       <md-icon class="md-24" svgIcon="toolbar:cancel"></md-icon>
     </button>
   </span>
@@ -43,7 +47,8 @@
   <span>
     <button *ngIf="toolbarService.exitButton.active" md-icon-button (click)="onClickExit()"
       mdTooltip="{{toolbarService.exitButton.tooltip}}" 
-      [mdTooltipPosition]="toolbarService.exitButton.tooltipPosition">
+      [mdTooltipPosition]="toolbarService.exitButton.tooltipPosition"
+      [disabled]="toolbarService.exitButton.disabled">
       <md-icon class="md-24" svgIcon="toolbar:close"></md-icon>
     </button>
   </span>
