@@ -13,7 +13,7 @@ export class ToolbarButtonProperties {
     {
         this.active = active
         this.tooltip = tooltip
-        if (tooltipPosition != undefined) {
+        if (tooltipPosition) {
             this.tooltipPosition = tooltipPosition
         }
     }
