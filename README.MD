@@ -6,7 +6,7 @@ experienced developers can help us to improve this good intented initiative.
 
 ##Requirements
 * See package.json in the testApp (see Quickstart)
-* Bonita BPM Community 7.3.2 > or higher (never tested on Commercial Licensed versions)
+* Bonita BPM Community 7.4.2 > or higher (never tested on Commercial Licensed versions)
 
 ##Quickstart
 To see how you can use the library. Look at out testApp https://github.com/onnohaldar/zgwnu-ng2-bonita-testapp
@@ -20,6 +20,10 @@ All basic Bonita Rest Api classes and settings that will be (re)used.
 Basic Bonita BPM Rest Api login and session functionality.
 #### bonita-bpm-activity-task
 Bonita BPM Activity and Task (info, assign and execution) functionality.
+#### bonita-bpm-case (NEW)
+Bonita BPM Case (process instance info, context) functionality.
+#### bonita-bpm-case-document (NEW)
+Bonita BPM Case Document (document create, search, get) functionality.
 #### bonita-bpm-process
 Bonita BPM Process (info and instantiation) functionality.
 #### bonita-bpm-data
