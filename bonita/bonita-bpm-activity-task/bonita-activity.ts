@@ -1,3 +1,4 @@
+import { BonitaActivityDeployActor } from './bonita-activity-deploy-actor'
 import { BonitaUtils } from '../bonita-rest-api/bonita-utils'
 
 export class BonitaActivity {
@@ -25,7 +26,16 @@ export class BonitaActivity {
         
         this.executedBy = activityData.executedBy
         this.executedBySubstitute = activityData.executedBySubstitute
-        this.actorId = activityData.actorId
+        if (this.actorId instanceof BonitaActivityDeployActor) {
+            this.actorId.id = activityData.actorId.id
+            this.actorId.process_id = activityData.actorId.process_id
+            this.actorId.description = activityData.actorId.description
+            this.actorId.name = activityData.actorId.name
+            this.actorId.displayName = activityData.actorId.displayName
+
+        } else {
+            this.actorId = activityData.actorId
+        }
         this.assigned_id = activityData.assigned_id
         if (activityData.assigned_date != '') { this.assigned_date = utils.getDateValue(activityData.assigned_date) }
     }
@@ -49,7 +59,7 @@ export class BonitaActivity {
 
     executedBy: string // "the id (long) of the user who performed this task. The activity has to be a human activity otherwise its value will be 0",
     executedBySubstitute: string // "the id (long) of the user who did actually performed the activity in the case of has been done in the name of someone else. Value is 0 otherwise",
-    actorId: string // "the id (long) of the actor that can execute this task, null otherwise",
+    actorId: string | BonitaActivityDeployActor // "the id (long) of the actor that can execute this task, null otherwise",
     assigned_id: string // "the user id (long) that this activity is assigned to, or 0 if it is unassigned",
     assigned_date: Date // "the date ('yyyy-MM-dd HH:mm:ss.SSS') when the current activity was assigned, for example '2014-10-17 16:05:42.626'"
 }
