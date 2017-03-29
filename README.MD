@@ -32,7 +32,3 @@ Bonita BPM Data level functionality.
 Functionality to retrieve Business Data.
 #### bonita-file-upload
 Functionality to upload files to the Bonita server (create temp. files to use with Bonita Documents).
-### datepicker
-Copy from a ng2datepicker module (done so to prevent AOT-compling issues)
-### toolbar
-Basic Angular 2 Material Toolbaar that we use for our applications
