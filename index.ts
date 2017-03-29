@@ -17,6 +17,7 @@ export { BonitaBpmTaskService } from './bonita-bpm-activity-task/bonita-bpm-task
 export { BonitaBpmHumanTaskService } from './bonita-bpm-activity-task/bonita-bpm-human-task.service'
 export { BonitaBpmUserTaskService } from './bonita-bpm-activity-task/bonita-bpm-user-task.service'
 export { BonitaActivity } from './bonita-bpm-activity-task/bonita-activity'
+export { BonitaActivityDeployActor } from './bonita-bpm-activity-task/bonita-activity-deploy-actor'
 export { BonitaHumanTask } from './bonita-bpm-activity-task/bonita-human-task'
 export { BonitaTask } from './bonita-bpm-activity-task/bonita-task'
 export { BonitaUserTask } from './bonita-bpm-activity-task/bonita-user-task'
