@@ -1,14 +1,21 @@
+import { BonitaFileUploadResponse } from './bonita-file-upload-response'
+
 export class BonitaContractInputFile {
 
-  constructor(inputFileData?: any){
-    if (inputFileData) {
-      if (inputFileData.filename) { this.filename = inputFileData.filename }
-      if (inputFileData.tempPath) { this.filename = inputFileData.tempPath }
-      if (inputFileData.contentType) { this.filename = inputFileData.contentType }
+  constructor(fileInput?: File, responseInput?: BonitaFileUploadResponse){
+
+    if (fileInput) {
+      this.filename = fileInput.name
+      this.contentType = fileInput.type
     }
+
+    if (responseInput) {
+        this.tempPath = responseInput.tempPath
+    }
+
   }
 
   filename: string
-  tempPath: string
   contentType: string
+  tempPath: string
 }
