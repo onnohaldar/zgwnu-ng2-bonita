@@ -20,7 +20,7 @@ export class BonitaConfigService {
     private formsDocumentImagePath: string = '/portal/formsDocumentImage'
     
     // server configuration urls
-    hostUrl: string = 'http://localhost:8080' 
+    hostUrl: string 
     baseUrl: string
     apiUrl: string
     fileUploadUrl: string
@@ -47,8 +47,11 @@ export class BonitaConfigService {
 
     initialize() {
         
-        if (location.hostname != 'localhost') {
-            // external server configuration
+        if (location.hostname == 'localhost') {
+            // local development server configuration
+            this.hostUrl = 'http://localhost:8080' 
+        } else {
+            // external test or production server configuration
             this.hostUrl = location.origin
         }
 
