@@ -48,10 +48,10 @@ export class BonitaConfigService {
     initialize() {
         
         if (location.hostname == 'localhost') {
-            // local development server configuration
+            // local development server configuration (Bonita Studio with Angular JIT)
             this.hostUrl = 'http://localhost:8080' 
         } else {
-            // external test or production server configuration
+            // external test or production server configuration (Bonita Platform)
             this.hostUrl = location.origin
         }
 
