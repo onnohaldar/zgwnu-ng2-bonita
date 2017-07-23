@@ -35,6 +35,22 @@ export class BonitaFileUploadService extends BonitaRestApiService {
         return this.servletUploadFile(this.bonitaConfigService.fileUploadUrl, file, fileId)
     }
 
+    uploadProcess(file: File, fileId: string): Observable<BonitaFileUploadResponse> {
+        return this.servletUploadFile(this.bonitaConfigService.processUploadUrl, file, fileId)
+    }
+
+    uploadOrganization(file: File, fileId: string): Observable<BonitaFileUploadResponse> {
+        return this.servletUploadFile(this.bonitaConfigService.organizationUploadUrl, file, fileId)
+    }
+
+    uploadActors(file: File, fileId: string): Observable<BonitaFileUploadResponse> {
+        return this.servletUploadFile(this.bonitaConfigService.actorsUploadUrl, file, fileId)
+    }
+
+    uploadImage(file: File, fileId: string): Observable<BonitaFileUploadResponse> {
+        return this.servletUploadFile(this.bonitaConfigService.imageUploadUrl, file, fileId)
+    }
+
     private servletUploadFile(servletUrl: string, file: File, fileId: string): Observable<BonitaFileUploadResponse> {
         let formData: FormData = new FormData()
         formData.append(fileId, file, file.name)

@@ -13,14 +13,22 @@ export class BonitaConfigService {
     private basePath: string = '/bonita'
     private apiPath: string = '/API'
     private fileUploadPath: string = '/portal/fileUpload'
+    private processUploadPath: string = '/portal/processUpload'
+    private organizationUploadPath: string = '/portal/organizationUpload'
+    private actorsUploadPath: string = '/portal/actorsUpload'
+    private imageUploadPath: string = '/portal/imageUpload'
     private formsDocumentImagePath: string = '/portal/formsDocumentImage'
     
-    // default local server configuration
+    // server configuration urls
     hostUrl: string = 'http://localhost:8080' 
-    baseUrl: string = this.hostUrl + this.basePath
-    apiUrl: string = this.baseUrl + this.apiPath
-    fileUploadUrl: string = this.baseUrl + this.fileUploadPath
-    formsDocumentImageUrl: string = this.baseUrl + this.formsDocumentImagePath
+    baseUrl: string
+    apiUrl: string
+    fileUploadUrl: string
+    processUploadUrl: string
+    organizationUploadUrl: string
+    actorsUploadUrl: string
+    imageUploadUrl: string
+    formsDocumentImageUrl: string
 
     // rest api options
     readonly bonitaSessionTokenKey: string = 'X-Bonita-API-Token'
@@ -40,16 +48,22 @@ export class BonitaConfigService {
     initialize() {
         
         if (location.hostname != 'localhost') {
-            this.configExternalUrls()
+            // external server configuration
+            this.hostUrl = location.origin
         }
+
+        this.configUrls()
 
     }
 
-    private configExternalUrls() {
-        this.hostUrl = location.origin 
+    private configUrls() {
         this.baseUrl = this.hostUrl + this.basePath
         this.apiUrl = this.baseUrl + this.apiPath
         this.fileUploadUrl = this.baseUrl + this.fileUploadPath
+        this.processUploadUrl = this.baseUrl + this.processUploadPath
+        this.organizationUploadUrl = this.baseUrl + this.organizationUploadPath
+        this.actorsUploadUrl = this.baseUrl + this.actorsUploadPath
+        this.imageUploadUrl = this.baseUrl + this.imageUploadPath
         this.formsDocumentImageUrl = this.baseUrl + this.formsDocumentImagePath
     }
 
