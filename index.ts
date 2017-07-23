@@ -47,7 +47,7 @@ export { BonitaBusinessDataContext } from './bonita-business-data/bonita-busines
 export { BonitaBusinessDataObject } from './bonita-business-data/bonita-business-data-object'
 export { BonitaBusinessDataQueryParms } from './bonita-business-data/bonita-business-data-query-parms'
 
-// Bonita Rest Api File Upload Component
+// Bonita Rest Api File Upload Services
 export { BonitaFileUploadService } from './bonita-file-upload/bonita-file-upload.service'
 export { BonitaContractInputFile } from './bonita-file-upload/bonita-contract-input-file'
 export { BonitaFileUploadResponse } from './bonita-file-upload/bonita-file-upload-response'
