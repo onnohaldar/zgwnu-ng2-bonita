@@ -32,14 +32,16 @@ export class BonitaFileUploadService extends BonitaRestApiService {
     }
 
     uploadFile(file: File, fileId: string): Observable<BonitaFileUploadResponse> {
+        return this.servletUploadFile(this.bonitaConfigService.fileUploadUrl, file, fileId)
+    }
+
+    private servletUploadFile(servletUrl: string, file: File, fileId: string): Observable<BonitaFileUploadResponse> {
         let formData: FormData = new FormData()
         formData.append(fileId, file, file.name)
-
         let uploadHeaders: Headers = new Headers({ 'Accept': 'application/json' })
         let uploadOptions: RequestOptions = new RequestOptions({ headers: uploadHeaders })
         this.bonitaConfigService.appendSessionOptions(uploadOptions)
-
-        return this.http.post(this.bonitaConfigService.fileUploadUrl, formData, uploadOptions)
+        return this.http.post(servletUrl, formData, uploadOptions)
                         .map(this.mapFileUploadResponse)
                         .catch(this.handleResponseError)
     }
