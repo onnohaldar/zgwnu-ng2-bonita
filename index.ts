@@ -1,3 +1,5 @@
+// ZaakgerichtWerken.nu Bonita Angular 4.x Rest Api Library Index
+
 // Bonita Rest Api Generic
 export { ZgwnuBonitaConfigService } from './zgwnu-bonita-rest-api/zgwnu-bonita-config.service'
 export { ZgwnuBonitaDataMappingInterface } from './zgwnu-bonita-rest-api/zgwnu-bonita-data-mapping.interface'
