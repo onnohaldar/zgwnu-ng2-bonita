@@ -1,10 +1,10 @@
-import { BonitaUtils } from '../bonita-rest-api/bonita-utils'
+import { ZgwnuBonitaUtils } from '../zgwnu-bonita-rest-api/zgwnu-bonita-utils'
 
-export class BonitaCase {
+export class ZgwnuBonitaCase {
 
     constructor(caseData: any)
     {
-        const utils = new BonitaUtils()
+        const utils = new ZgwnuBonitaUtils()
 
         this.id = caseData.id
         this.end_date = utils.getDateValue(caseData.end_date)

@@ -1,4 +1,4 @@
-// Bonita Rest Api BPM Case (Process Instance) Service
+// ZaakgerichtWerken.nu Bonita Rest Api BPM Case (Process Instance) Service
 // --------------------------------------------------------------------------
 //
 // based on http://documentation.bonitasoft.com/?page=bpm-api#toc23
@@ -11,19 +11,19 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 
-import { BonitaRestApiService } from '../bonita-rest-api/bonita-rest-api.service'
-import { BonitaConfigService } from '../bonita-rest-api/bonita-config.service'
-import { BonitaSearchParms } from '../bonita-rest-api/bonita-search-parms'
-import { BonitaCase } from './bonita-case'
-import { BonitaCaseMapping } from './bonita-case-mapping'
+import { ZgwnuBonitaRestApiService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-rest-api.service'
+import { ZgwnuBonitaConfigService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-config.service'
+import { ZgwnuBonitaSearchParms } from '../zgwnu-bonita-rest-api/zgwnu-bonita-search-parms'
+import { ZgwnuBonitaCase } from './zgwnu-bonita-case'
+import { ZgwnuBonitaCaseMapping } from './zgwnu-bonita-case-mapping'
 
 @Injectable()
-export class BonitaBpmCaseService extends BonitaRestApiService {
+export class ZgwnuBonitaBpmCaseService extends ZgwnuBonitaRestApiService {
     private resourcePath: string = '/bpm/case'
     private resourceUrl: string
 
     constructor(
-        private configService: BonitaConfigService,
+        private configService: ZgwnuBonitaConfigService,
         private http: Http
     ) 
     { 
@@ -33,19 +33,19 @@ export class BonitaBpmCaseService extends BonitaRestApiService {
         this.resourceUrl = configService.apiUrl + this.resourcePath
     }
 
-    searchCases(searchParms: BonitaSearchParms): Observable<BonitaCase[]> {
-        let caseMapping: BonitaCaseMapping = new BonitaCaseMapping()
+    searchCases(searchParms: ZgwnuBonitaSearchParms): Observable<ZgwnuBonitaCase[]> {
+        let caseMapping: ZgwnuBonitaCaseMapping = new ZgwnuBonitaCaseMapping()
         return this.http.get(this.buildSearchRequest(searchParms), this.configService.options)
                         .map(caseMapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
 
-    private buildSearchRequest(searchParms: BonitaSearchParms): string {
+    private buildSearchRequest(searchParms: ZgwnuBonitaSearchParms): string {
         return this.resourceUrl + '?' + searchParms.getUrlEncondedParms()
     }
 
-    getCase(caseId: string): Observable<BonitaCase> {
-        let caseMapping: BonitaCaseMapping = new BonitaCaseMapping()
+    getCase(caseId: string): Observable<ZgwnuBonitaCase> {
+        let caseMapping: ZgwnuBonitaCaseMapping = new ZgwnuBonitaCaseMapping()
         return this.http.get(this.resourceUrl + '/' + caseId, this.configService.options)
                         .map(caseMapping.mapResponse)
                         .catch(this.handleResponseError)
