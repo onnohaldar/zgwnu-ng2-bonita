@@ -1,4 +1,4 @@
-export class BonitaCaseVariable {
+export class ZgwnuBonitaCaseVariable {
 
     constructor(caseVariableData: any)
     {
