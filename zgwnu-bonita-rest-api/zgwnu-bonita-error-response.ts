@@ -1,6 +1,6 @@
 import { ZgwnuBonitaResponse } from './zgwnu-bonita-response'
 
-export class BonitaErrorResponse extends ZgwnuBonitaResponse {
+export class ZgwnuBonitaErrorResponse extends ZgwnuBonitaResponse {
     exception: string
     message: string
     explanations: string[]

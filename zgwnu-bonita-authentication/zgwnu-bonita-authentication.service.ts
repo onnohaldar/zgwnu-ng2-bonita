@@ -1,4 +1,4 @@
-// Bonita Rest Api Authentication Service
+// ZaakgerichtWerken.nu Bonita Rest Api Authentication Service
 // --------------------------------------------------------------------------
 //
 // based on http://documentation.bonitasoft.com/?page=rest-api-overview#toc2
@@ -12,54 +12,56 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 
-import { BonitaRestApiService } from '../bonita-rest-api/bonita-rest-api.service'
-import { BonitaDataMappingInterface } from '../bonita-rest-api/bonita-data-mapping.interface'
-import { BonitaConfigService } from '../bonita-rest-api/bonita-config.service'
-import { BonitaCredentials } from './bonita-credentials'
-import { BonitaSession } from './bonita-session'
-import { BonitaSessionMapping } from './bonita-session-mapping'
-import { BonitaResponse } from '../bonita-rest-api/bonita-response'
-import { BonitaErrorResponse } from '../bonita-rest-api/bonita-error-response'
+import { ZgwnuBonitaRestApiService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-rest-api.service'
+import { ZgwnuBonitaDataMappingInterface } from '../zgwnu-bonita-rest-api/zgwnu-bonita-data-mapping.interface'
+import { ZgwnuBonitaConfigService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-config.service'
+import { ZgwnuBonitaCredentials } from './zgwnu-bonita-credentials'
+import { ZgwnuBonitaSession } from './zgwnu-bonita-session'
+import { ZgwnuBonitaSessionMapping } from './zgwnu-bonita-session-mapping'
+import { ZgwnuBonitaResponse } from '../zgwnu-bonita-rest-api/zgwnu-bonita-response'
+import { ZgwnuBonitaErrorResponse } from '../zgwnu-bonita-rest-api/zgwnu-bonita-error-response'
 
 @Injectable()
-export class BonitaAuthenticationService extends BonitaRestApiService {
+export class ZgwnuBonitaAuthenticationService extends ZgwnuBonitaRestApiService {
+    private readonly LOGIN_SERVICE_PATH: string = '/loginservice'
+    private readonly CURRENT_SESSION_RESOURCE_PATH = '/system/session/unusedid'
 
-    successResponse: BonitaResponse
-    errorResponse: BonitaErrorResponse
+    successResponse: ZgwnuBonitaResponse
+    errorResponse: ZgwnuBonitaErrorResponse
 
     constructor(
-        private configService: BonitaConfigService,
+        private configService: ZgwnuBonitaConfigService,
         private http: Http,
         private router: Router)
     { 
         super()
     }
 
-    private executeLogin(creds: BonitaCredentials): Observable<BonitaResponse> {
+    private executeLogin(creds: ZgwnuBonitaCredentials): Observable<ZgwnuBonitaResponse> {
         let credsUrlEncoded: string = 'username=' + creds.username + '&password=' + creds.password + '&redirect=false'
         let headers: Headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
         let options: RequestOptions = new RequestOptions({ headers: headers })
-        let postUrl: string = this.configService.baseUrl + '/loginservice'
+        let postUrl: string = this.configService.baseUrl + this.LOGIN_SERVICE_PATH
 
         return this.http.post(postUrl, credsUrlEncoded, options)
                         .map(this.mapSuccessResponse)
                         .catch(this.handleResponseError)
     }
 
-    getSession(): Observable<BonitaSession> {
-        let sessionMapping: BonitaDataMappingInterface = new BonitaSessionMapping()
-        return this.http.get(this.configService.apiUrl + '/system/session/unusedid', this.configService.options)
+    getCurrentSession(): Observable<ZgwnuBonitaSession> {
+        let sessionMapping: ZgwnuBonitaDataMappingInterface = new ZgwnuBonitaSessionMapping()
+        return this.http.get(this.configService.apiUrl + this.CURRENT_SESSION_RESOURCE_PATH, this.configService.options)
                 .map(sessionMapping.mapResponse)
                 .catch(this.handleResponseError)
 
     }
 
-    login(creds: BonitaCredentials) {
+    login(creds: ZgwnuBonitaCredentials) {
         this.executeLogin(creds)
             .subscribe(
                 successResponse => {
                     this.successResponse = successResponse
-                    this.getSession()
+                    this.getCurrentSession()
                         .subscribe(
                             session => {
                                  if (creds.username == session.user_name) {

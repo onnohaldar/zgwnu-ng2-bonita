@@ -1,4 +1,4 @@
-export class BonitaCredentials {
+export class ZgwnuBonitaCredentials {
 
   constructor(
     public username: string,

@@ -1,6 +1,6 @@
 import { Headers } from '@angular/http'
 
-export class BonitaSession {
+export class ZgwnuBonitaSession {
 
   constructor(sessionData: any, headerData: Headers)
   {
