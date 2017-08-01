@@ -1,4 +1,4 @@
-export class BonitaBusinessDataContext {
+export class ZgwnuBonitaBusinessDataContext {
 
     constructor(businessDataRef: any) {
         this.name = businessDataRef.name

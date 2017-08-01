@@ -1,4 +1,4 @@
-export abstract class BonitaBusinessDataObject {
+export abstract class ZgwnuBonitaBusinessDataObject {
 
   constructor(objectData: any)
   {

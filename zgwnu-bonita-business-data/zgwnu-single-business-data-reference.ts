@@ -1,4 +1,4 @@
-export class SingleBusinessDataRefence {
+export class ZgwnuSingleBusinessDataRefence {
 
     constructor(referenceData: any)
     {

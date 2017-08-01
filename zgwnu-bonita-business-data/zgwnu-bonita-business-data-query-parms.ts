@@ -1,4 +1,4 @@
-// Bonita Rest Api Business Data Query Parameters
+// ZaakgerichtWerken.nu Bonita Rest Api Business Data Query Parameters
 // --------------------------------------------------------------------------
 //
 // based on http://documentation.bonitasoft.com/?page=bdm-api#toc1
@@ -6,7 +6,7 @@
 // Request URL template: ../API/bdm/businessData/_businessDataType_?q=_queryName_
 //                       &p=0&c=10&f=param=value
 //
-export class BonitaBusinessDataQueryParms {
+export class ZgwnuBonitaBusinessDataQueryParms {
 
   constructor(
     public queryName: string,
