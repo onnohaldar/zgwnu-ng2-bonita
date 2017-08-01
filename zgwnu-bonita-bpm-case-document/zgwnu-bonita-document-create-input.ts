@@ -1,4 +1,4 @@
-export class BonitaDocumentCreateInput {
+export class ZgwnuBonitaDocumentCreateInput {
 
     constructor(inputData?: any)
     {

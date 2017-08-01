@@ -1,4 +1,4 @@
-export class BonitaDocumentUpdateInput {
+export class ZgwnuBonitaDocumentUpdateInput {
     name?: string
     file?: string
     url?: string

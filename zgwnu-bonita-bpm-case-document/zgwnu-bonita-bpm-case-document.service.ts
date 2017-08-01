@@ -1,4 +1,4 @@
-// Bonita Rest Api BPM Case Document Service
+// ZaakgerichtWerken.nu Bonita Rest Api BPM Case Document Service
 // --------------------------------------------------------------------------
 //
 // based on http://documentation.bonitasoft.com/?page=bpm-api#toc17
@@ -12,21 +12,21 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 
-import { BonitaRestApiService } from '../bonita-rest-api/bonita-rest-api.service'
-import { BonitaConfigService } from '../bonita-rest-api/bonita-config.service'
-import { BonitaSearchParms } from '../bonita-rest-api/bonita-search-parms'
-import { BonitaDocument } from './bonita-document'
-import { BonitaDocumentMapping } from './bonita-document-mapping'
-import { BonitaDocumentCreateInput } from './bonita-document-create-input'
-import { BonitaDocumentUpdateInput } from './bonita-document-update-input'
+import { ZgwnuBonitaRestApiService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-rest-api.service'
+import { ZgwnuBonitaConfigService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-config.service'
+import { ZgwnuBonitaSearchParms } from '../zgwnu-bonita-rest-api/zgwnu-bonita-search-parms'
+import { ZgwnuBonitaDocument } from './zgwnu-bonita-document'
+import { ZgwnuBonitaDocumentMapping } from './zgwnu-bonita-document-mapping'
+import { ZgwnuBonitaDocumentCreateInput } from './zgwnu-bonita-document-create-input'
+import { ZgwnuBonitaDocumentUpdateInput } from './zgwnu-bonita-document-update-input'
 
 @Injectable()
-export class BonitaBpmCaseDocumentService extends BonitaRestApiService {
+export class ZgwnuBonitaBpmCaseDocumentService extends ZgwnuBonitaRestApiService {
     private resourcePath: string = '/bpm/caseDocument'
     private resourceUrl: string
 
     constructor(
-        private configService: BonitaConfigService,
+        private configService: ZgwnuBonitaConfigService,
         private http: Http, 
         private sanitizer: DomSanitizer, 
     ) 
@@ -37,35 +37,35 @@ export class BonitaBpmCaseDocumentService extends BonitaRestApiService {
         this.resourceUrl = configService.apiUrl + this.resourcePath
     }
 
-    createDocument(documentCreateInput: BonitaDocumentCreateInput): Observable<BonitaDocument> {
-        let documentMapping: BonitaDocumentMapping = new BonitaDocumentMapping()
+    createDocument(documentCreateInput: ZgwnuBonitaDocumentCreateInput): Observable<ZgwnuBonitaDocument> {
+        let documentMapping: ZgwnuBonitaDocumentMapping = new ZgwnuBonitaDocumentMapping()
         return this.http.post(this.resourceUrl, documentCreateInput, this.configService.sendOptions)
                         .map(documentMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
-    updateDocument(documentId: string, documentUpdateInput: BonitaDocumentUpdateInput): Observable<BonitaDocument> {
-        let documentMapping: BonitaDocumentMapping = new BonitaDocumentMapping()
+    updateDocument(documentId: string, documentUpdateInput: ZgwnuBonitaDocumentUpdateInput): Observable<ZgwnuBonitaDocument> {
+        let documentMapping: ZgwnuBonitaDocumentMapping = new ZgwnuBonitaDocumentMapping()
         return this.http.put(this.resourceUrl + '/' + documentId, documentUpdateInput, this.configService.sendOptions)
                         .map(documentMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
-    getDocument(documentId: string): Observable<BonitaDocument> {
-        let documentMapping: BonitaDocumentMapping = new BonitaDocumentMapping()
+    getDocument(documentId: string): Observable<ZgwnuBonitaDocument> {
+        let documentMapping: ZgwnuBonitaDocumentMapping = new ZgwnuBonitaDocumentMapping()
         return this.http.get(this.resourceUrl + '/' + documentId, this.configService.options)
                         .map(documentMapping.mapResponse)
                         .catch(this.handleResponseError)
     }
 
-    searchDocuments(searchParms: BonitaSearchParms): Observable<BonitaDocument[]> {
-        let documentMapping: BonitaDocumentMapping = new BonitaDocumentMapping()
+    searchDocuments(searchParms: ZgwnuBonitaSearchParms): Observable<ZgwnuBonitaDocument[]> {
+        let documentMapping: ZgwnuBonitaDocumentMapping = new ZgwnuBonitaDocumentMapping()
         return this.http.get(this.buildSearchRequest(searchParms), this.configService.options)
                         .map(documentMapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
 
-    private buildSearchRequest(searchParms: BonitaSearchParms): string {
+    private buildSearchRequest(searchParms: ZgwnuBonitaSearchParms): string {
         return this.resourceUrl + '?' + searchParms.getUrlEncondedParms()
     }
 

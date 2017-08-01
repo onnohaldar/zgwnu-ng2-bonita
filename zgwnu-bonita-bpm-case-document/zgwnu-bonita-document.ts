@@ -1,10 +1,10 @@
-import { BonitaUtils } from '../bonita-rest-api/bonita-utils'
+import { ZgwnuBonitaUtils } from '../zgwnu-bonita-rest-api/zgwnu-bonita-utils'
 
-export class BonitaDocument {
+export class ZgwnuBonitaDocument {
 
     constructor(documentData: any)
     {
-        const utils = new BonitaUtils()
+        const utils = new ZgwnuBonitaUtils()
 
         this.id = documentData.id
         this.creationDate = utils.getDateValue(documentData.creationDate)
