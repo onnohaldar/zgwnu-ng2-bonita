@@ -1,4 +1,4 @@
-export class BonitaResponse {
+export class ZgwnuBonitaResponse {
     status: number
     statusText: string
 }

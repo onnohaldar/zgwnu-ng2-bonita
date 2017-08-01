@@ -6,7 +6,7 @@
 // Request URL template: .../API/resource?p={page}&c={count}&o={order}
 //                       &s={query}&f={filter_name}={filter_value}&f=...
 //
-export class BonitaSearchParms {
+export class ZgwnuBonitaSearchParms {
 
   constructor(
     public page: number,
@@ -18,25 +18,25 @@ export class BonitaSearchParms {
   ) {  }
 
   getUrlEncondedParms(): string {
-      var buildParms: string;
+      var buildParms: string
 
       // p: index of the page to display
-      buildParms = 'p=' + String(this.page);
+      buildParms = 'p=' + String(this.page)
       
       // c: maximum number of elements to retrieve
-      buildParms = buildParms + '&c=' + String(this.count);
+      buildParms = buildParms + '&c=' + String(this.count)
       
       // o: order of presentation of values in response: 
       //    must be either attributeName ASC or attributeName DESC.
       if (this.order) {
-        buildParms = buildParms + '&o=' + encodeURIComponent(this.order);
+        buildParms = buildParms + '&o=' + encodeURIComponent(this.order)
       }
       
       // s: search on name or search indexes. 
       //    If word-based search is disabled, s=Valid returns 
       //    matches containing the string "valid" at the start of the attribute value
       if (this.query) {
-        buildParms = buildParms + '&s=' + encodeURIComponent(this.query);
+        buildParms = buildParms + '&s=' + encodeURIComponent(this.query)
       }
 
       // f: list of filters, specified as attributeName=attributeValue. 
@@ -44,7 +44,7 @@ export class BonitaSearchParms {
       if (this.filters) {
          for (let filter of this.filters)
         { 
-            buildParms = buildParms + '&f=' + encodeURIComponent(filter);
+            buildParms = buildParms + '&f=' + encodeURIComponent(filter)
         }
       }
 
@@ -55,14 +55,14 @@ export class BonitaSearchParms {
       if (this.deploys) {
          for (let deploy of this.deploys)
         { 
-            buildParms = buildParms + '&d=' + encodeURIComponent(deploy);
+            buildParms = buildParms + '&d=' + encodeURIComponent(deploy)
         }
       }
 
       // return spaces '+' encoded
-      var urlEncodedParms: string = buildParms.replace(/%20/g, '+');
+      var urlEncodedParms: string = buildParms.replace(/%20/g, '+')
       
-      return urlEncodedParms;
+      return urlEncodedParms
   }
 
 }

@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core'
 import { Location } from '@angular/common'
 import { Headers, RequestOptions } from '@angular/http'
 
-import { BonitaSession } from '../bonita-authentication/bonita-session'
+import { ZgwnuBonitaSession } from '../zgwnu-bonita-authentication/zgwnu-bonita-session'
 
 @Injectable()
-export class BonitaConfigService {
+export class ZgwnuBonitaConfigService {
     // default zgwnu Business Data Model Package configuration
     businessDataModelPackage: string = 'com.zaakgerichtwerkennu.model'
 
@@ -37,7 +37,7 @@ export class BonitaConfigService {
     sendOptions: RequestOptions
 
     // current session
-    private _session: BonitaSession
+    private _session: ZgwnuBonitaSession
 
     constructor (
         location: Location)
@@ -70,7 +70,7 @@ export class BonitaConfigService {
         this.formsDocumentImageUrl = this.baseUrl + this.formsDocumentImagePath
     }
 
-    set session(session: BonitaSession) {
+    set session(session: ZgwnuBonitaSession) {
         this._session = session
         this.configSendOptions()
     }

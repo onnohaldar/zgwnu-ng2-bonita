@@ -1,8 +1,8 @@
-import { BonitaFileUploadResponse } from './bonita-file-upload-response'
+import { ZgwnuBonitaFileUploadResponse } from './zgwnu-bonita-file-upload-response'
 
-export class BonitaContractInputFile {
+export class ZgwnuBonitaContractInputFile {
 
-  constructor(fileInput?: File, responseInput?: BonitaFileUploadResponse){
+  constructor(fileInput?: File, responseInput?: ZgwnuBonitaFileUploadResponse){
 
     if (fileInput) {
       this.filename = fileInput.name

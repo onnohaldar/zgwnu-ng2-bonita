@@ -1,4 +1,4 @@
-// Bonita Rest Api Service
+// ZaakgerichtWerken.nu Bonita Rest Api Service
 // --------------------------------------------------------------------------
 //
 // based on http://documentation.bonitasoft.com/?page=_rest-api
@@ -10,26 +10,26 @@ import { Response } from '@angular/http'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/observable/throw'
 
-import { BonitaConfigService } from './bonita-config.service'
-import { BonitaDataMappingInterface } from './bonita-data-mapping.interface'
-import { BonitaDataMapping } from './bonita-data-mapping'
-import { BonitaResponse } from './bonita-response'
-import { BonitaErrorResponse } from './bonita-error-response'
+import { ZgwnuBonitaConfigService } from './zgwnu-bonita-config.service'
+import { ZgwnuBonitaDataMappingInterface } from './bonita-data-mapping.interface'
+import { ZgwnuBonitaDataMapping } from './bonita-data-mapping'
+import { ZgwnuBonitaResponse } from './bonita-response'
+import { ZgwnuBonitaErrorResponse } from './bonita-error-response'
 
 @Injectable()
-export abstract class BonitaRestApiService {
+export abstract class ZgwnuBonitaRestApiService {
     
-    protected mapping: BonitaDataMappingInterface = new BonitaDataMapping()
+    protected mapping: ZgwnuBonitaDataMappingInterface = new ZgwnuBonitaDataMapping()
 
     protected mapSuccessResponse(res: Response) {
-        let successResponse = new BonitaResponse()
+        let successResponse: ZgwnuBonitaResponse = new ZgwnuBonitaResponse()
         successResponse.status = res.status
         successResponse.statusText = res.statusText
         return successResponse
     }
 
     protected handleResponseError(error: Response | any) {
-        let errorResponse = new BonitaErrorResponse()
+        let errorResponse: ZgwnuBonitaErrorResponse = new ZgwnuBonitaErrorResponse()
         if (error instanceof Response) {
             errorResponse.status = error.status
             errorResponse.statusText = error.statusText
