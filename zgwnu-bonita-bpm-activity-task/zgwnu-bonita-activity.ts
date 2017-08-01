@@ -1,11 +1,11 @@
-import { BonitaActivityDeployActor } from './bonita-activity-deploy-actor'
-import { BonitaUtils } from '../bonita-rest-api/bonita-utils'
+import { ZgwnuBonitaActivityDeployActor } from './zgwnu-bonita-activity-deploy-actor'
+import { ZgwnuBonitaUtils } from '../zgwnu-bonita-rest-api/zgwnu-bonita-utils'
 
-export class BonitaActivity {
+export class ZgwnuBonitaActivity {
 
     constructor(activityData: any) 
     {
-        const utils = new BonitaUtils()
+        const utils = new ZgwnuBonitaUtils()
 
         this.id = activityData.id
         this.type = activityData.type
@@ -26,7 +26,7 @@ export class BonitaActivity {
         
         this.executedBy = activityData.executedBy
         this.executedBySubstitute = activityData.executedBySubstitute
-        if (this.actorId instanceof BonitaActivityDeployActor) {
+        if (this.actorId instanceof ZgwnuBonitaActivityDeployActor) {
             this.actorId.id = activityData.actorId.id
             this.actorId.process_id = activityData.actorId.process_id
             this.actorId.description = activityData.actorId.description

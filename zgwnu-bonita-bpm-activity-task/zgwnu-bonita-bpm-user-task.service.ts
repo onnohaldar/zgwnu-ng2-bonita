@@ -1,4 +1,4 @@
-// Bonita Rest Api BPM User Task Service
+// ZaakgerichtWerken.nu Bonita Rest Api BPM User Task Service
 // --------------------------------------------------------------------------
 //
 // based on http://documentation.bonitasoft.com/?page=bpm-api#toc6
@@ -11,32 +11,32 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 
-import { BonitaRestApiService } from '../bonita-rest-api/bonita-rest-api.service'
-import { BonitaDataMappingInterface } from '../bonita-rest-api/bonita-data-mapping.interface'
-import { BonitaConfigService } from '../bonita-rest-api/bonita-config.service'
-import { BonitaBpmTaskUpdateInput } from './bonita-bpm-task-update-input'
-import { BonitaUserTask } from './bonita-user-task'
-import { BonitaUserTaskMapping } from './bonita-user-task-mapping'
-import { BonitaResponse } from '../bonita-rest-api/bonita-response'
+import { ZgwnuBonitaRestApiService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-rest-api.service'
+import { ZgwnuBonitaDataMappingInterface } from '../zgwnu-bonita-rest-api/zgwnu-bonita-data-mapping.interface'
+import { ZgwnuBonitaConfigService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-config.service'
+import { ZgwnuBonitaBpmTaskUpdateInput } from './zgwnu-bonita-bpm-task-update-input'
+import { ZgwnuBonitaUserTask } from './zgwnu-bonita-user-task'
+import { ZgwnuBonitaUserTaskMapping } from './zgwnu-bonita-user-task-mapping'
+import { ZgwnuBonitaResponse } from '../zgwnu-bonita-rest-api/zgwnu-bonita-response'
 
 @Injectable()
-export class BonitaBpmUserTaskService extends BonitaRestApiService {
-    private userTaskResourcePath: string = '/bpm/userTask'
+export class ZgwnuBonitaBpmUserTaskService extends ZgwnuBonitaRestApiService {
+    private readonly USER_TASK_RESOURCE_PATH: string = '/bpm/userTask'
     private userTaskResourceUrl: string
 
     constructor(
-        private configService: BonitaConfigService,
+        private configService: ZgwnuBonitaConfigService,
         private http: Http
     ) 
     { 
         super()
 
         // configure resource urls
-        this.userTaskResourceUrl = configService.apiUrl + this.userTaskResourcePath
+        this.userTaskResourceUrl = configService.apiUrl + this.USER_TASK_RESOURCE_PATH
     }
 
-    getUserTask(userTaskId: string): Observable<BonitaUserTask> {
-        let userTaskMapping: BonitaDataMappingInterface = new BonitaUserTaskMapping()
+    getUserTask(userTaskId: string): Observable<ZgwnuBonitaUserTask> {
+        let userTaskMapping: ZgwnuBonitaDataMappingInterface = new ZgwnuBonitaUserTaskMapping()
         return this.http.get(this.userTaskResourceUrl + '/' + userTaskId, this.configService.options)
                         .map(userTaskMapping.mapResponse)
                         .catch(this.handleResponseError)
@@ -48,8 +48,8 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
                         .catch(this.handleResponseError)
     }
 
-    assignUserTask(userTaskId: string, userId?: string): Observable<BonitaResponse> {
-        let body: BonitaBpmTaskUpdateInput = new BonitaBpmTaskUpdateInput()
+    assignUserTask(userTaskId: string, userId?: string): Observable<ZgwnuBonitaResponse> {
+        let body: ZgwnuBonitaBpmTaskUpdateInput = new ZgwnuBonitaBpmTaskUpdateInput()
 
         if (userId) {
             // assign to specified user
@@ -66,7 +66,7 @@ export class BonitaBpmUserTaskService extends BonitaRestApiService {
 
     }
 
-    executeUserTask(userTaskId: string, contractValues: any): Observable<BonitaResponse> {
+    executeUserTask(userTaskId: string, contractValues: any): Observable<ZgwnuBonitaResponse> {
         let postUrl = this.userTaskResourceUrl + '/' + userTaskId + '/execution'
         return this.http.post(postUrl, contractValues, this.configService.sendOptions)
                         .map(this.mapSuccessResponse)

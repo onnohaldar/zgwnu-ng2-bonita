@@ -1,5 +1,5 @@
 
-export class BonitaActivityDeployActor {
+export class ZgwnuBonitaActivityDeployActor {
 
     constructor()
     {    }
