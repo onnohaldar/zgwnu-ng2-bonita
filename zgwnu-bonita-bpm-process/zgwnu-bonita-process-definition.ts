@@ -1,10 +1,10 @@
-import { BonitaUtils } from '../bonita-rest-api/bonita-utils'
+import { ZgwnuBonitaUtils } from '../zgwnu-bonita-rest-api/zgwnu-bonita-utils'
 
-export class BonitaProcessDefinition {
+export class ZgwnuBonitaProcessDefinition {
 
   constructor(processDefinitionData: any) 
   {
-    const utils = new BonitaUtils()
+    const utils = new ZgwnuBonitaUtils()
 
     this.id = processDefinitionData.id
     this.icon = processDefinitionData.icon

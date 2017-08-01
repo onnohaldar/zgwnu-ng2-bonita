@@ -1,6 +1,6 @@
-import { BonitaResponse } from '../bonita-rest-api/bonita-response'
+import { ZgwnuBonitaResponse } from '../zgwnu-bonita-rest-api/zgwnu-bonita-response'
 
-export class BonitaDeployProcessDefinitionSuccessResponse extends BonitaResponse {
+export class ZgwnuBonitaDeployProcessDefinitionSuccessResponse extends ZgwnuBonitaResponse {
     id: string
     deploymentDate: Date
     description: string

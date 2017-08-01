@@ -1,4 +1,4 @@
-// Bonita Rest Api BPM Process Service
+// ZaakgerichtWerken.nu Bonita Rest Api BPM Process Service
 // --------------------------------------------------------------------------
 //
 // based on http://documentation.bonitasoft.com/?page=bpm-api#toc28
@@ -11,45 +11,45 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 
-import { BonitaRestApiService } from '../bonita-rest-api/bonita-rest-api.service'
-import { BonitaUtils } from '../bonita-rest-api/bonita-utils'
-import { BonitaConfigService } from '../bonita-rest-api/bonita-config.service'
-import { BonitaSearchParms } from '../bonita-rest-api/bonita-search-parms'
-import { BonitaFileUploadResponse } from '../bonita-file-upload/bonita-file-upload-response'
-import { BonitaProcessDefinition } from './bonita-process-definition'
-import { BonitaProcessDefinitionMapping } from './bonita-process-definition-mapping'
-import { BonitaCreateCaseSuccessResponse } from './bonita-create-case-success-response'
-import { BonitaDeployProcessDefinitionSuccessResponse } from './bonita-deploy-process-definition-success-response'
+import { ZgwnuBonitaRestApiService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-rest-api.service'
+import { ZgwnuBonitaUtils } from '../zgwnu-bonita-rest-api/zgwnu-bonita-utils'
+import { ZgwnuBonitaConfigService } from '../zgwnu-bonita-rest-api/zgwnu-bonita-config.service'
+import { ZgwnuBonitaSearchParms } from '../zgwnu-bonita-rest-api/zgwnu-bonita-search-parms'
+import { ZgwnuBonitaFileUploadResponse } from '../zgwnu-bonita-file-upload/zgwnu-bonita-file-upload-response'
+import { ZgwnuBonitaProcessDefinition } from './zgwnu-bonita-process-definition'
+import { ZgwnuBonitaProcessDefinitionMapping } from './zgwnu-bonita-process-definition-mapping'
+import { ZgwnuBonitaCreateCaseSuccessResponse } from './zgwnu-bonita-create-case-success-response'
+import { ZgwnuBonitaDeployProcessDefinitionSuccessResponse } from './zgwnu-bonita-deploy-process-definition-success-response'
 
 @Injectable()
-export class BonitaBpmProcessService extends BonitaRestApiService {
-    private resourcePath: string = '/bpm/process'
+export class ZgwnuBonitaBpmProcessService extends ZgwnuBonitaRestApiService {
+    private readonly RESOURCE_PATH: string = '/bpm/process'
     private resourceUrl: string
 
     constructor(
-        private configService: BonitaConfigService,
+        private configService: ZgwnuBonitaConfigService,
         private http: Http
     ) 
     { 
         super()
 
         // configure resource urls
-        this.resourceUrl = configService.apiUrl + this.resourcePath
+        this.resourceUrl = configService.apiUrl + this.RESOURCE_PATH
     }
 
-    searchProcessDefinitions(searchParms: BonitaSearchParms): Observable<BonitaProcessDefinition[]> {
-        let processDefinitionMapping: BonitaProcessDefinitionMapping = new BonitaProcessDefinitionMapping()
+    searchProcessDefinitions(searchParms: ZgwnuBonitaSearchParms): Observable<ZgwnuBonitaProcessDefinition[]> {
+        let processDefinitionMapping: ZgwnuBonitaProcessDefinitionMapping = new ZgwnuBonitaProcessDefinitionMapping()
         return this.http.get(this.buildSearchRequest(searchParms), this.configService.options)
                         .map(processDefinitionMapping.mapResponseArray)
                         .catch(this.handleResponseError)
     }
 
-    private buildSearchRequest(searchParms: BonitaSearchParms): string {
+    private buildSearchRequest(searchParms: ZgwnuBonitaSearchParms): string {
         return this.resourceUrl + '?' + searchParms.getUrlEncondedParms()
     }
 
-    getProcessDefinition(processDefinitionId: string): Observable<BonitaProcessDefinition> {
-        let processDefinitionMapping: BonitaProcessDefinitionMapping = new BonitaProcessDefinitionMapping()
+    getProcessDefinition(processDefinitionId: string): Observable<ZgwnuBonitaProcessDefinition> {
+        let processDefinitionMapping: ZgwnuBonitaProcessDefinitionMapping = new ZgwnuBonitaProcessDefinitionMapping()
         return this.http.get(this.resourceUrl + '/' + processDefinitionId, this.configService.options)
                         .map(processDefinitionMapping.mapResponse)
                         .catch(this.handleResponseError)
@@ -61,7 +61,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     //
     // Post URL template: ../API/bpm/process/:processId/instantiation
     //
-    createCase(processId: string, contractValues: any): Observable<BonitaCreateCaseSuccessResponse> {
+    createCase(processId: string, contractValues: any): Observable<ZgwnuBonitaCreateCaseSuccessResponse> {
         let postUrl: string = this.resourceUrl + '/' + processId + '/instantiation'
         return this.http.post(postUrl, contractValues, this.configService.sendOptions)
                         .map(this.mapCreateCaseSuccessResponse)
@@ -69,7 +69,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     }
 
     private mapCreateCaseSuccessResponse(res: Response) {
-        let successResponse = new BonitaCreateCaseSuccessResponse()
+        let successResponse = new ZgwnuBonitaCreateCaseSuccessResponse()
         successResponse.status = res.status
         successResponse.statusText = res.statusText
         successResponse.caseId = res.json().caseId
@@ -82,7 +82,7 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     //
     // Post URL template: ../API/bpm/process
     //
-    deployProcessDefinition(processUploadResponse: BonitaFileUploadResponse): Observable<BonitaDeployProcessDefinitionSuccessResponse> {
+    deployProcessDefinition(processUploadResponse: ZgwnuBonitaFileUploadResponse): Observable<ZgwnuBonitaDeployProcessDefinitionSuccessResponse> {
         let requestPayload: any = { "fileupload": processUploadResponse.tempPath }
         return this.http.post(this.resourceUrl, requestPayload, this.configService.sendOptions)
                         .map(this.mapDeployProcessDefinitionSuccessResponse)
@@ -90,8 +90,8 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
     }
 
     private mapDeployProcessDefinitionSuccessResponse(res: Response) {
-        let utils: BonitaUtils = new BonitaUtils()
-        let successResponse = new BonitaDeployProcessDefinitionSuccessResponse()
+        let utils: ZgwnuBonitaUtils = new ZgwnuBonitaUtils()
+        let successResponse = new ZgwnuBonitaDeployProcessDefinitionSuccessResponse()
         successResponse.status = res.status
         successResponse.statusText = res.statusText
         let body: any = res.json()
