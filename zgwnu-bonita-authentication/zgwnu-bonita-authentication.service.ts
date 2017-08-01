@@ -35,6 +35,12 @@ export class ZgwnuBonitaAuthenticationService extends ZgwnuBonitaRestApiService 
         private router: Router)
     { 
         super()
+        
+        // initialize authentication using current session
+        this.getCurrentSession()
+            .subscribe(
+                currentSession => configService.session = currentSession
+            )
     }
 
     private executeLogin(creds: ZgwnuBonitaCredentials): Observable<ZgwnuBonitaResponse> {
