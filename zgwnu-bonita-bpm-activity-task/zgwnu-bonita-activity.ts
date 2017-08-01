@@ -59,7 +59,7 @@ export class ZgwnuBonitaActivity {
 
     executedBy: string // "the id (long) of the user who performed this task. The activity has to be a human activity otherwise its value will be 0",
     executedBySubstitute: string // "the id (long) of the user who did actually performed the activity in the case of has been done in the name of someone else. Value is 0 otherwise",
-    actorId: string | BonitaActivityDeployActor // "the id (long) of the actor that can execute this task, null otherwise",
+    actorId: string | ZgwnuBonitaActivityDeployActor // "the id (long) of the actor that can execute this task, null otherwise",
     assigned_id: string // "the user id (long) that this activity is assigned to, or 0 if it is unassigned",
     assigned_date: Date // "the date ('yyyy-MM-dd HH:mm:ss.SSS') when the current activity was assigned, for example '2014-10-17 16:05:42.626'"
 }

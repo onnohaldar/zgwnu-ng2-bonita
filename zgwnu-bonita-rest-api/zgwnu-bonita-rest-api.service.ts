@@ -11,10 +11,10 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/observable/throw'
 
 import { ZgwnuBonitaConfigService } from './zgwnu-bonita-config.service'
-import { ZgwnuBonitaDataMappingInterface } from './bonita-data-mapping.interface'
-import { ZgwnuBonitaDataMapping } from './bonita-data-mapping'
-import { ZgwnuBonitaResponse } from './bonita-response'
-import { ZgwnuBonitaErrorResponse } from './bonita-error-response'
+import { ZgwnuBonitaDataMappingInterface } from './zgwnu-bonita-data-mapping.interface'
+import { ZgwnuBonitaDataMapping } from './zgwnu-bonita-data-mapping'
+import { ZgwnuBonitaResponse } from './zgwnu-bonita-response'
+import { ZgwnuBonitaErrorResponse } from './zgwnu-bonita-error-response'
 
 @Injectable()
 export abstract class ZgwnuBonitaRestApiService {
