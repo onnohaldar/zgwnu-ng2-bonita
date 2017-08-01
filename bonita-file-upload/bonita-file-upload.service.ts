@@ -54,7 +54,8 @@ export class BonitaFileUploadService extends BonitaRestApiService {
     private servletUploadFile(servletUrl: string, file: File, fileId: string): Observable<BonitaFileUploadResponse> {
         let formData: FormData = new FormData()
         formData.append(fileId, file, file.name)
-        let uploadHeaders: Headers = new Headers({ 'Accept': 'application/json' })
+        //let uploadHeaders: Headers = new Headers({ 'Accept': 'application/json' })
+        let uploadHeaders: Headers = new Headers()
         let uploadOptions: RequestOptions = new RequestOptions({ headers: uploadHeaders })
         this.bonitaConfigService.appendSessionOptions(uploadOptions)
         return this.http.post(servletUrl, formData, uploadOptions)

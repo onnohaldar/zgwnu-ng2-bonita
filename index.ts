@@ -40,6 +40,7 @@ export { BonitaCaseVariable } from './bonita-bpm-data/bonita-case-variable'
 export { BonitaBpmProcessService } from './bonita-bpm-process/bonita-bpm-process.service'
 export { BonitaCreateCaseSuccessResponse } from './bonita-bpm-process/bonita-create-case-success-response'
 export { BonitaProcessDefinition } from './bonita-bpm-process/bonita-process-definition'
+import { BonitaDeployProcessDefinitionSuccessResponse } from './bonita-bpm-process/bonita-deploy-process-definition-success-response'
 
 // Bonita Rest Api Business Data
 export { BonitaBusinessDataService } from './bonita-business-data/bonita-business-data.service'

@@ -1,7 +1,7 @@
 // Bonita Rest Api BPM Process Service
 // --------------------------------------------------------------------------
 //
-// based on http://documentation.bonitasoft.com/?page=bpm-api#toc27
+// based on http://documentation.bonitasoft.com/?page=bpm-api#toc28
 //
 //
 import { Injectable } from '@angular/core'
@@ -12,11 +12,14 @@ import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 
 import { BonitaRestApiService } from '../bonita-rest-api/bonita-rest-api.service'
+import { BonitaUtils } from '../bonita-rest-api/bonita-utils'
 import { BonitaConfigService } from '../bonita-rest-api/bonita-config.service'
 import { BonitaSearchParms } from '../bonita-rest-api/bonita-search-parms'
+import { BonitaFileUploadResponse } from '../bonita-file-upload/bonita-file-upload-response'
 import { BonitaProcessDefinition } from './bonita-process-definition'
 import { BonitaProcessDefinitionMapping } from './bonita-process-definition-mapping'
 import { BonitaCreateCaseSuccessResponse } from './bonita-create-case-success-response'
+import { BonitaDeployProcessDefinitionSuccessResponse } from './bonita-deploy-process-definition-success-response'
 
 @Injectable()
 export class BonitaBpmProcessService extends BonitaRestApiService {
@@ -70,6 +73,38 @@ export class BonitaBpmProcessService extends BonitaRestApiService {
         successResponse.status = res.status
         successResponse.statusText = res.statusText
         successResponse.caseId = res.json().caseId
+        return successResponse
+    }
+
+    // Deploy a process definition
+    //
+    // based on: http://documentation.bonitasoft.com/?page=bpm-api#toc28
+    //
+    // Post URL template: ../API/bpm/process
+    //
+    deployProcessDefinition(processUploadResponse: BonitaFileUploadResponse): Observable<BonitaDeployProcessDefinitionSuccessResponse> {
+        let requestPayload: any = { "fileupload": processUploadResponse.tempPath }
+        return this.http.post(this.resourceUrl, requestPayload, this.configService.sendOptions)
+                        .map(this.mapDeployProcessDefinitionSuccessResponse)
+                        .catch(this.handleResponseError)
+    }
+
+    private mapDeployProcessDefinitionSuccessResponse(res: Response) {
+        let utils: BonitaUtils = new BonitaUtils()
+        let successResponse = new BonitaDeployProcessDefinitionSuccessResponse()
+        successResponse.status = res.status
+        successResponse.statusText = res.statusText
+        let body: any = res.json()
+        successResponse.id = body.id
+        successResponse.deploymentDate = utils.getDateValue(body.deploymentDate)
+        successResponse.description = body.description
+        successResponse.activationState = body.activationState
+        successResponse.name = body.name
+        successResponse.displayName = body.displayName
+        successResponse.actorinitiatorid = body.actorinitiatorid
+        successResponse.last_update_date = utils.getDateValue(body.last_update_date)
+        successResponse.configurationState = body.configurationState
+        successResponse.version = body.version
         return successResponse
     }
 
