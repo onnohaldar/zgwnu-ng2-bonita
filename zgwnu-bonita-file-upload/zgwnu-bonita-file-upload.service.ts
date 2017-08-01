@@ -54,7 +54,6 @@ export class ZgwnuBonitaFileUploadService extends ZgwnuBonitaRestApiService {
     private servletUploadFile(servletUrl: string, file: File, fileId: string): Observable<ZgwnuBonitaFileUploadResponse> {
         let formData: FormData = new FormData()
         formData.append(fileId, file, file.name)
-        //let uploadHeaders: Headers = new Headers({ 'Accept': 'application/json' })
         let uploadHeaders: Headers = new Headers()
         let uploadOptions: RequestOptions = new RequestOptions({ headers: uploadHeaders })
         this.configService.appendSessionOptions(uploadOptions)
