@@ -43,6 +43,9 @@ export * from './zgwnu-bonita-bpm-process/zgwnu-bonita-bpm-process.service'
 export * from './zgwnu-bonita-bpm-process/zgwnu-bonita-create-case-success-response'
 export * from './zgwnu-bonita-bpm-process/zgwnu-bonita-process-definition'
 export * from './zgwnu-bonita-bpm-process/zgwnu-bonita-deploy-process-definition-success-response'
+export * from './zgwnu-bonita-bpm-process/zgwnu-bonita-process-update-input'
+export * from './zgwnu-bonita-bpm-process/zgwnu-bonita-process-update-success-response'
+
 
 // Bonita Rest Api Business Data
 export * from './zgwnu-bonita-business-data/zgwnu-bonita-business-data.service'

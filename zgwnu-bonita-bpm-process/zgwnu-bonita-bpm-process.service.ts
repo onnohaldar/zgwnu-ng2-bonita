@@ -20,6 +20,8 @@ import { ZgwnuBonitaProcessDefinition } from './zgwnu-bonita-process-definition'
 import { ZgwnuBonitaProcessDefinitionMapping } from './zgwnu-bonita-process-definition-mapping'
 import { ZgwnuBonitaCreateCaseSuccessResponse } from './zgwnu-bonita-create-case-success-response'
 import { ZgwnuBonitaDeployProcessDefinitionSuccessResponse } from './zgwnu-bonita-deploy-process-definition-success-response'
+import { ZgwnuBonitaProcessUpdateInput } from './zgwnu-bonita-process-update-input'
+import { ZgwnuBonitaProcessUpdateSuccessResponse } from './zgwnu-bonita-process-update-success-response'
 
 @Injectable()
 export class ZgwnuBonitaBpmProcessService extends ZgwnuBonitaRestApiService {
@@ -106,6 +108,19 @@ export class ZgwnuBonitaBpmProcessService extends ZgwnuBonitaRestApiService {
         successResponse.configurationState = body.configurationState
         successResponse.version = body.version
         return successResponse
+    }
+
+    updateProcessDefinition(processDefinitionId: string, updateInput: ZgwnuBonitaProcessUpdateInput):  Observable<ZgwnuBonitaProcessUpdateSuccessResponse> {
+        return this.http.put(this.resourceUrl + '/' + processDefinitionId, updateInput, this.configService.sendOptions)
+                        .map(this.mapUpdateProcessDefinitionUpdateSuccessResponse)
+                        .catch(this.handleResponseError)        
+    }
+
+    private mapUpdateProcessDefinitionUpdateSuccessResponse(res: Response) {
+        let updateRes: ZgwnuBonitaProcessUpdateSuccessResponse = new ZgwnuBonitaProcessUpdateSuccessResponse()
+        updateRes.status = res.status
+        updateRes.statusText = res.statusText
+        return updateRes
     }
 
 }

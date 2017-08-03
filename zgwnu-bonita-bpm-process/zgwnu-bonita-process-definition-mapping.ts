@@ -6,6 +6,7 @@ import { ZgwnuBonitaProcessDefinition } from './zgwnu-bonita-process-definition'
 export class ZgwnuBonitaProcessDefinitionMapping implements ZgwnuBonitaDataMappingInterface {
 
     mapResponse(res: Response) {
+        console.log(res)
         let processDefinitionData = new ZgwnuBonitaProcessDefinition(res.json())
         return processDefinitionData
     }
