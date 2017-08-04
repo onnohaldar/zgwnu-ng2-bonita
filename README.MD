@@ -28,4 +28,4 @@ Bonita BPM Data level functionality.
 #### zgwnu-bonita-business-data
 Functionality to retrieve Business Data.
 #### zgwnu-bonita-file-upload
-Functionality to upload files to the Bonita server (create temp. files to use with Bonita Documents).
+Functionality to upload files to the Bonita server.
