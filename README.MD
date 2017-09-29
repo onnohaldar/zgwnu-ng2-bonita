@@ -1,3 +1,6 @@
+# DEPRECIATED
+__This Library is no longer maintained. ZGW.NU has build a Public NPM Package that contains the same functionality for Agular 4.3.6 (and higher) based on the new Angular HttpClient Module (@common/http).  See NPM Package for more info https://www.npmjs.com/package/@zgwnu/ng-bonita__ 
+
 # Angular 2 Library with bonita BPM Rest Api functionality
 
 This library contains Angular 4.x for TypeScript classes that ZaakgerichtWerken.nu will use to create BPM application examples. 
